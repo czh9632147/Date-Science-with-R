@@ -1,0 +1,808 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={3220103172},
+  pdfauthor={Zhehao Chen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{3220103172}
+\author{Zhehao Chen}
+\date{2024-07-08}
+
+\begin{document}
+\maketitle
+
+\subsubsection{1.}\label{section}
+
+\subparagraph{(a) (5,8,1,5,8,1,\ldots,5,8,1) where there are 10
+occurrences of
+5.}\label{a-581581581-where-there-are-10-occurrences-of-5.}
+
+To create a vector that repeats the sequence (5, 8, 1) so that there are
+10 occurrences of 5, you can use the rep function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{vec\_a }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(tmp, }\AttributeTok{times =} \DecValTok{10}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(vec\_a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1 5 8 1
+\end{verbatim}
+
+\subparagraph{(b) (5,5,\ldots,5,8,8,\ldots,8,1,1,\ldots,1) where there
+are 30 occurrences of 5, 20 occurrences of 8 and 10 occurrences of
+1.}\label{b-555888111-where-there-are-30-occurrences-of-5-20-occurrences-of-8-and-10-occurrences-of-1.}
+
+To create a vector with 30 occurrences of 5, 20 occurrences of 8, and 10
+occurrences of 1, you can use the rep function with the times argument
+as a vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmp }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{vec\_b }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(tmp, }\AttributeTok{times =}\NormalTok{ times)}
+\FunctionTok{print}\NormalTok{(vec\_b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 8 8 8 8 8 8 8 8
+## [39] 8 8 8 8 8 8 8 8 8 8 8 8 1 1 1 1 1 1 1 1 1 1
+\end{verbatim}
+
+\subsubsection{2.}\label{section-1}
+
+Execute the following lines which create two vectors of random integers
+which are chosen with replacement from the integers 0,1,\ldots,999. Both
+vectors have length 250.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ xVec }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{999}\NormalTok{, }\DecValTok{250}\NormalTok{, }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{ yVec }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{999}\NormalTok{, }\DecValTok{250}\NormalTok{, }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{ xVec}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 204 532 876 419 841 875 165 531 605  92 529 761 600 286 600 261 787  78
+##  [19] 430 244 960 907 409 184 552 511 141 118 497 397 325 265 524 153 832 545
+##  [37] 119 540 416 998 669  51 810 754 440 472 903 730 296 642 980 135 518 993
+##  [55] 982 700 238 283 985 763 457 101  60 683 702 907  82 831 516 490 600 274
+##  [73] 893 446 802 671 190 663 741  93 982 561 241 135 947 522 839 813   9 574
+##  [91] 288 404 525 523 311  87 663 444 782 607 226 747 816 799  31 660 633 561
+## [109]   1 128 928 105 138 550 202 755 709 804 991 882 233 845 264 507 202 550
+## [127] 547 229 774 743 255 980 690 525 656 661 618 300 308 515  36 489 821 204
+## [145] 454  53 704   9 535 663 752 885 701 248 656   4 965 162 133 102 510  15
+## [163] 843 395  70  80 279 762  61 872 773 736 177 557 217 824 639  32 691 245
+## [181]  66 850 708 882 420 860 630 147 476 780 704 152 950 755 360 329 677 496
+## [199] 573 168   2 610 855 458 581   7 146 917 748 987 130 806  12 988 100 653
+## [217] 757 243 278  34 366 550 969 301 910 971  99 186 426 792 386 521 269 868
+## [235] 912 413 401 208 335 784 137 580 565 245 170 216 133 102 390 728
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ yVec}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 664 172 922 260 469  89 968 930  39 766 110 316 144 924  52 182 436 111
+##  [19] 533 741 263 621 244 462 751  31 567 776 916 517 337 812 468 467 724 390
+##  [37] 738 847  18 919 924 757 197 554 848 444 540 195 422 413  29 447 157 983
+##  [55] 201 424 839 485 793 618 346 414 907 839 969  86 542 343 717 187 201 891
+##  [73] 149 815 522 503 217 239 989 770 236 784 796 593 977 975 522 318  74 634
+##  [91] 261 116 699  66 460 555 666 142 282 149 692  43 948  43 885  73 824 965
+## [109] 714 349 386 922 550 264  46 316  25  89 755 229 210 490 143 656 818 986
+## [127] 761 879  80 231 176 265 259 713 869 185 977 866 834 974  61 845 805  17
+## [145] 715 557 889 851  89  94 176  58 205 288 704  72 923 193 301 177 521 475
+## [163] 876 224 428 354 506 333 657  42 904 811  46 199 914 176 334 656 296 581
+## [181] 979 734  70 497 780 112 896 106 777 612 550 393 678 174 129 669 248 446
+## [199] 758 520 100 997 210 639 394 447  37 335 922 611 188 585 842 459 965 192
+## [217] 388 712  91 432  89 486 146  40 182   2 151 451 337 117 522  73 730  43
+## [235]  87  71 234 981 173 903 370 704 207 228 243 653 954 718 586 536
+\end{verbatim}
+
+\subparagraph{(a) Create the vector (y2 − x1,··· ,yn −
+xn−1).}\label{a-create-the-vector-y2-x1-yn-xn1.}
+
+yVec{[}2:250{]} - xVec{[}1:249{]} creates a vector by subtracting each
+element in xVec (from the 1st to the 249th) from the corresponding next
+element in yVec (from the 2nd to the 250th).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aVec }\OtherTok{\textless{}{-}}\NormalTok{ yVec[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{250}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ xVec[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{249}\NormalTok{]}
+\FunctionTok{print}\NormalTok{(aVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]  -32  390 -616   50 -752   93  765 -492  161   18 -213 -617  324 -234 -418
+##  [16]  175 -676  455  311   19 -339 -663   53  567 -521   56  635  798   20  -60
+##  [31]  487  203  -57  571 -442  193  728 -522  503  -74   88  146 -256   94    4
+##  [46]   68 -708 -308  117 -613 -533   22  465 -792 -558  139  247  510 -367 -417
+##  [61]  -43  806  779  286 -616 -365  261 -114 -329 -289  291 -125  -78   76 -299
+##  [76] -454   49  326   29  143 -198  235  352  842   28    0 -521 -739  625 -313
+##  [91] -172  295 -459  -63  244  579 -521 -162 -633   85 -183  201 -773   86   42
+## [106]  164  332  153  348  258   -6  445  126 -504  114 -730 -620  -49 -762 -672
+## [121]  257 -702  392  311  784  211  332 -149 -543 -567   10 -721   23  344 -471
+## [136]  316  248  534  666 -454  809  316 -804  511  103  836  147   80 -441 -487
+## [151] -694 -680 -413  456 -584  919 -772  139   44  419  -35  861 -619   33  284
+## [166]  426   54 -105  -19   32   38 -690   22  357  -41 -490   17  264 -110  734
+## [181]  668 -780 -211 -102 -308   36 -524  630  136 -230 -311  526 -776 -626  309
+## [196]  -81 -231  262  -53  -68  995 -400 -216  -64 -134   30  189    5 -137 -799
+## [211]  455   36  447  -23   92 -265  -45 -152  154   55  120 -404 -929 -119 -908
+## [226] -820  352  151 -309 -270 -313  209 -226 -781 -841 -179  580  -35  568 -414
+## [241]  567 -373 -337   -2  483  738  585  484  146
+\end{verbatim}
+
+\subparagraph{(b) Pick out the values in yVec which are \textgreater{}
+600.}\label{b-pick-out-the-values-in-yvec-which-are-600.}
+
+yVec{[}yVec \textgreater{} 600{]} selects the values from yVec that are
+greater than 600.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bVec }\OtherTok{\textless{}{-}}\NormalTok{ yVec[yVec }\SpecialCharTok{\textgreater{}} \DecValTok{600}\NormalTok{]}
+\FunctionTok{print}\NormalTok{(bVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 664 922 968 930 766 924 741 621 751 776 916 812 724 738 847 919 924 757 848
+## [20] 983 839 793 618 907 839 969 717 891 815 989 770 784 796 977 975 634 699 666
+## [39] 692 948 885 824 965 714 922 755 656 818 986 761 879 713 869 977 866 834 974
+## [58] 845 805 715 889 851 704 923 876 657 904 811 914 656 979 734 780 896 777 612
+## [77] 678 669 758 997 639 922 611 842 965 712 730 981 903 704 653 954 718
+\end{verbatim}
+
+\subparagraph{(c) What are the index positions in yVec of the values
+which are \textgreater{}
+600?}\label{c-what-are-the-index-positions-in-yvec-of-the-values-which-are-600}
+
+which(yVec \textgreater{} 600) returns the index positions of elements
+in yVec that are greater than 600.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cVec }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(yVec }\SpecialCharTok{\textgreater{}} \DecValTok{600}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(cVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]   1   3   7   8  10  14  20  22  25  28  29  32  35  37  38  40  41  42  45
+## [20]  54  57  59  60  63  64  65  69  72  74  79  80  82  83  85  86  90  93  97
+## [39] 101 103 105 107 108 109 112 119 124 125 126 127 128 134 135 137 138 139 140
+## [58] 142 143 145 147 148 155 157 163 169 171 172 175 178 181 182 185 187 189 190
+## [77] 193 196 199 202 204 209 210 213 215 218 233 238 240 242 246 247 248
+\end{verbatim}
+
+\subparagraph{(d) Sort the numbers in the vector xVec in the order of
+increasing values in
+yVec.}\label{d-sort-the-numbers-in-the-vector-xvec-in-the-order-of-increasing-values-in-yvec.}
+
+xVec{[}order(yVec){]} sorts xVec based on the order of the corresponding
+elements in yVec.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dVec }\OtherTok{\textless{}{-}}\NormalTok{ xVec[}\FunctionTok{order}\NormalTok{(yVec)]}
+\FunctionTok{print}\NormalTok{(dVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 971 204 416 709 980 511 146 605 301 872 747 799 868 202 177 600 885  36
+##  [19] 523 708 413   4 660 521   9 774 907 912 875 804 535 366 278 663   2 147
+##  [37] 529  78 860 404 792 360 444 264 600 969 893 607  99 518 532 335 755 255
+##  [55] 752 824 102 261 910 661 490 130 653 162 730 810 557 982 600 701 565 233
+##  [73] 855 190 395 245 882 743 401 982 663 170 409 677 690 419 288 960 550 980
+##  [91] 782 248 691 133 761 755 813 762 639 917 325 426 831 457 128  80 137 928
+## [109] 757 545 152 581 642 101 296 700  70  34 787 472 496 135   7 186 988 311
+## [127] 184 153 524 841  15 283 550 845 882 671 279 397 168 510 802 839 386 430
+## [145] 728 903  82 138 704 754  87  53 141 245 806 390 135 987 780 763 907 574
+## [163] 458 216 507  32  61 204 663 329 950 226 525 656 580 243 525   1 454 516
+## [181] 102 832 269 850 119 244 552 991  51 573 547  92  93 118 476 420 561 985
+## [199] 241 821 736 265 446 202 633 308 238 683  12 489 540 440   9 300 656 843
+## [217] 229  31 704 274 630 784 773  60 217 497 998 876 105 748 965 286 669 531
+## [235] 816 133 561 100 165 702 515 522 947 618  66 208 993 550 741 610
+\end{verbatim}
+
+\subparagraph{(e) Pick out the elements in yVec at index positions
+1,4,7,10,13,···}\label{e-pick-out-the-elements-in-yvec-at-index-positions-1471013}
+
+yVec{[}seq(1, length(yVec), by = 3){]} picks out every third element in
+yVec starting from the first position.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eVec }\OtherTok{\textless{}{-}}\NormalTok{ yVec[}\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{length}\NormalTok{(yVec), }\AttributeTok{by =} \DecValTok{3}\NormalTok{)]}
+\FunctionTok{print}\NormalTok{(eVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 664 260 968 766 144 182 533 621 751 776 337 467 738 919 197 444 422 447 201
+## [20] 485 346 839 542 187 149 503 989 784 977 318 261  66 666 149 948  73 714 922
+## [39]  46  89 210 656 761 231 259 185 834 845 715 851 176 288 923 177 876 354 657
+## [58] 811 914 656 979 497 896 612 678 669 758 997 394 335 188 459 388 432 146   2
+## [77] 337  73  87 981 370 228 954 536
+\end{verbatim}
+
+\subsubsection{3.}\label{section-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{34}\NormalTok{, }\DecValTok{33}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{89}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{43}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{11}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{23}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+\NormalTok{X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 34 33 65 37 89 NA 43 NA 11 NA 23 NA
+\end{verbatim}
+
+\subparagraph{Write a piece of R code to count the number of occurrences
+of NA in
+X?}\label{write-a-piece-of-r-code-to-count-the-number-of-occurrences-of-na-in-x}
+
+is.na(X) returns a logical vector of the same length as X with TRUE for
+each NA and FALSE otherwise.\\
+sum(is.na(X)) sums the TRUE values, effectively counting the number of
+NA values in X.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{na\_count }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(X))}
+\FunctionTok{print}\NormalTok{(na\_count)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\subsubsection{4.}\label{section-3}
+
+For this problem we'll use the (built-in) dataset state.x77.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(state)}
+\NormalTok{state.x77 }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(state.x77, }\AttributeTok{rownames =} \StringTok{\textquotesingle{}State\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{(a) Select all the states having an income less than 4300,
+and calculate the average income of these
+states.}\label{a-select-all-the-states-having-an-income-less-than-4300-and-calculate-the-average-income-of-these-states.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select states with income less than 4300}
+\NormalTok{low\_income\_states }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Income }\SpecialCharTok{\textless{}} \DecValTok{4300}\NormalTok{)}
+
+\CommentTok{\# Calculate the average income of these states}
+\NormalTok{average\_low\_income }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(low\_income\_states}\SpecialCharTok{$}\NormalTok{Income)}
+\NormalTok{average\_low\_income}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3830.6
+\end{verbatim}
+
+\subparagraph{(b) Sort the data by income and select the state with the
+highest
+income.}\label{b-sort-the-data-by-income-and-select-the-state-with-the-highest-income.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sort the data by income}
+\NormalTok{sorted\_states }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Income))}
+
+\CommentTok{\# Select the state with the highest income}
+\NormalTok{highest\_income\_state }\OtherTok{\textless{}{-}}\NormalTok{ sorted\_states }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{highest\_income\_state}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 9
+##   State  Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost   Area
+##   <chr>       <dbl>  <dbl>      <dbl>      <dbl>  <dbl>     <dbl> <dbl>  <dbl>
+## 1 Alaska        365   6315        1.5       69.3   11.3      66.7   152 566432
+\end{verbatim}
+
+\subparagraph{(c) Add a variable to the data frame which categorizes the
+size of population: \textless= 4500 is S, \$\textgreater{} 4500 \$ is
+L.}\label{c-add-a-variable-to-the-data-frame-which-categorizes-the-size-of-population-4500-is-s-4500-is-l.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add a variable categorizing the size of population}
+\NormalTok{state.x77 }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{PopulationSize =} \FunctionTok{ifelse}\NormalTok{(Population }\SpecialCharTok{\textless{}=} \DecValTok{4500}\NormalTok{, }\StringTok{\textquotesingle{}S\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(state.x77)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##   State    Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost   Area
+##   <chr>         <dbl>  <dbl>      <dbl>      <dbl>  <dbl>     <dbl> <dbl>  <dbl>
+## 1 Alabama        3615   3624        2.1       69.0   15.1      41.3    20  50708
+## 2 Alaska          365   6315        1.5       69.3   11.3      66.7   152 566432
+## 3 Arizona        2212   4530        1.8       70.6    7.8      58.1    15 113417
+## 4 Arkansas       2110   3378        1.9       70.7   10.1      39.9    65  51945
+## 5 Califor~      21198   5114        1.1       71.7   10.3      62.6    20 156361
+## 6 Colorado       2541   4884        0.7       72.1    6.8      63.9   166 103766
+## # i 1 more variable: PopulationSize <chr>
+\end{verbatim}
+
+\subparagraph{(d) Find out the average income and illiteracy of the two
+groups of states, distinguishing by whether the states are small or
+large.}\label{d-find-out-the-average-income-and-illiteracy-of-the-two-groups-of-states-distinguishing-by-whether-the-states-are-small-or-large.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the average income and illiteracy of the two groups of states}
+\NormalTok{grouped\_stats }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(PopulationSize) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{Average\_Income =} \FunctionTok{mean}\NormalTok{(Income),}
+    \AttributeTok{Average\_Illiteracy =} \FunctionTok{mean}\NormalTok{(Illiteracy)}
+\NormalTok{  )}
+
+\NormalTok{grouped\_stats}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   PopulationSize Average_Income Average_Illiteracy
+##   <chr>                   <dbl>              <dbl>
+## 1 L                       4608.               1.2 
+## 2 S                       4355.               1.16
+\end{verbatim}
+
+\subsubsection{5.}\label{section-4}
+
+\subparagraph{(a) Write a function to simulate n observations of (X1,X2)
+which follow the uniform distribution over the square {[}0,1{]} ×
+{[}0,1{]}.}\label{a-write-a-function-to-simulate-n-observations-of-x1x2-which-follow-the-uniform-distribution-over-the-square-01-01.}
+
+simulate\_observations(n) generates n pairs of (X1,X2) uniformly
+distributed over {[}0,1{]}×{[}0,1{]}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulate\_observations }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  X1 }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  X2 }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(X1, X2))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{(b) Write a function to calculate the proportion of the
+observations that the distance between (X1,X2) and the nearest edge is
+less than 0.25, and the proportion of them with the distance to the
+nearest vertex less than
+0.25.}\label{b-write-a-function-to-calculate-the-proportion-of-the-observations-that-the-distance-between-x1x2-and-the-nearest-edge-is-less-than-0.25-and-the-proportion-of-them-with-the-distance-to-the-nearest-vertex-less-than-0.25.}
+
+edge\_proportion: The proportion of observations where the distance to
+the nearest edge is less than 0.25.\\
+vertex\_proportion: The proportion of observations where the distance to
+the nearest vertex is less than 0.25.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_proportions }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(observations) \{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(observations)}
+\NormalTok{  X1 }\OtherTok{\textless{}{-}}\NormalTok{ observations}\SpecialCharTok{$}\NormalTok{X1}
+\NormalTok{  X2 }\OtherTok{\textless{}{-}}\NormalTok{ observations}\SpecialCharTok{$}\NormalTok{X2}
+  
+  \CommentTok{\# Distance to the nearest edge}
+\NormalTok{  edge\_distances }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(X1, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X1, X2, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X2)}
+\NormalTok{  edge\_proportion }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(edge\_distances }\SpecialCharTok{\textless{}} \FloatTok{0.25}\NormalTok{)}
+  
+  \CommentTok{\# Distance to the nearest vertex}
+\NormalTok{  vertex\_distances }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (0,0)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (0,1)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (1,0)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)   }\CommentTok{\# distance to (1,1)}
+\NormalTok{  )}
+\NormalTok{  vertex\_proportion }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(vertex\_distances }\SpecialCharTok{\textless{}} \FloatTok{0.25}\NormalTok{)}
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{edge\_proportion =}\NormalTok{ edge\_proportion, }\AttributeTok{vertex\_proportion =}\NormalTok{ vertex\_proportion))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{Example Usage:}\label{example-usage}
+
+Here's how you can use the functions to simulate observations and
+calculate the proportions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simulate 1000 observations}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)  }\CommentTok{\# Setting seed for reproducibility}
+\NormalTok{observations }\OtherTok{\textless{}{-}} \FunctionTok{simulate\_observations}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+
+\CommentTok{\# Calculate proportions}
+\NormalTok{proportions }\OtherTok{\textless{}{-}} \FunctionTok{calculate\_proportions}\NormalTok{(observations)}
+\FunctionTok{print}\NormalTok{(proportions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $edge_proportion
+## [1] 0.735
+## 
+## $vertex_proportion
+## [1] 0.198
+\end{verbatim}
+
+\subsubsection{6.}\label{section-5}
+
+Mortality rates per 100,000 from male suicides for a number of age
+groups and a number of countries are given in the following data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{ suicrates }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{Country =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Canada\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Israel\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Japan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Austria\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}France\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Germany\textquotesingle{}}\NormalTok{,}
+ \StringTok{\textquotesingle{}Hungary\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Italy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Netherlands\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Poland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Spain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sweden\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Switzerland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}UK\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}USA\textquotesingle{}}\NormalTok{),}
+ \AttributeTok{Age25.34 =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+ \AttributeTok{Age35.44 =} \FunctionTok{c}\NormalTok{(}\DecValTok{27}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{22}\NormalTok{),}
+ \AttributeTok{Age45.54 =} \FunctionTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{28}\NormalTok{),}
+ \AttributeTok{Age55.64 =} \FunctionTok{c}\NormalTok{(}\DecValTok{34}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{33}\NormalTok{),}
+ \AttributeTok{Age65.74 =} \FunctionTok{c}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{37}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{(a) Transform suicrates into long
+form.}\label{a-transform-suicrates-into-long-form.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{\# Transforming the data to long form}
+\NormalTok{suicrates\_long }\OtherTok{\textless{}{-}}\NormalTok{ suicrates }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Age"}\NormalTok{), }\AttributeTok{names\_to =} \StringTok{"AgeGroup"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Rate"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(suicrates\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 75 x 3
+##    Country AgeGroup  Rate
+##    <chr>   <chr>    <dbl>
+##  1 Canada  Age25.34    22
+##  2 Canada  Age35.44    27
+##  3 Canada  Age45.54    31
+##  4 Canada  Age55.64    34
+##  5 Canada  Age65.74    24
+##  6 Israel  Age25.34     9
+##  7 Israel  Age35.44    19
+##  8 Israel  Age45.54    10
+##  9 Israel  Age55.64    14
+## 10 Israel  Age65.74    27
+## # i 65 more rows
+\end{verbatim}
+
+\subparagraph{(b) Construct side-by-side box plots for the data from
+different age groups, and comment on what the graphic tells us about the
+data.}\label{b-construct-side-by-side-box-plots-for-the-data-from-different-age-groups-and-comment-on-what-the-graphic-tells-us-about-the-data.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Constructing side{-}by{-}side box plots}
+\FunctionTok{ggplot}\NormalTok{(suicrates\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ AgeGroup, }\AttributeTok{y =}\NormalTok{ Rate)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Suicide Rates by Age Group"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Age Group"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Suicide Rate per 100,000"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{3220103172_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\subsubsection{7.}\label{section-6}
+
+In the data set pressure, the relevant theory is that associated with
+the Claudius- Clapeyron equation, by which the logarithm of the vapor
+pressure is approximately inversely proportional to the absolute
+temperature (temperature + 273). Transform the data in the manner
+suggested by this theoretical relationship, plot the data, fit a
+regression line, and add the line to the graph. Does the fit seem
+adequate? \#\#\#\#\# (1) Load the `pressure' data set
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{data}\NormalTok{(pressure)}
+\FunctionTok{head}\NormalTok{(pressure)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   temperature pressure
+## 1           0   0.0002
+## 2          20   0.0012
+## 3          40   0.0060
+## 4          60   0.0300
+## 5          80   0.0900
+## 6         100   0.2700
+\end{verbatim}
+
+\subparagraph{(2) Transform the data}\label{transform-the-data}
+
+According to the Clausius-Clapeyron equation, the logarithm of the vapor
+pressure is approximately inversely proportional to the absolute
+temperature (temperature + 273). We'll transform the temperature to its
+absolute value and compute the logarithm of the vapor pressure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pressure}\SpecialCharTok{$}\NormalTok{TemperatureK }\OtherTok{\textless{}{-}}\NormalTok{ pressure}\SpecialCharTok{$}\NormalTok{temperature }\SpecialCharTok{+} \DecValTok{273}
+\NormalTok{pressure}\SpecialCharTok{$}\NormalTok{log\_pressure }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(pressure}\SpecialCharTok{$}\NormalTok{pressure)}
+\end{Highlighting}
+\end{Shaded}
+
+\subparagraph{(3) Plot the transformed
+data}\label{plot-the-transformed-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ pressure}\SpecialCharTok{$}\NormalTok{TemperatureK, pressure}\SpecialCharTok{$}\NormalTok{log\_pressure,}
+     \AttributeTok{xlab =} \StringTok{"1 / Temperature (1/K)"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Log(Pressure)"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Clausius{-}Clapeyron Plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{3220103172_files/figure-latex/unnamed-chunk-24-1.pdf}
+\#\#\#\#\# (4) Fit a regression line Fit a linear model to the
+transformed data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(log\_pressure }\SpecialCharTok{\textasciitilde{}} \FunctionTok{I}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ TemperatureK), }\AttributeTok{data =}\NormalTok{ pressure)}
+\FunctionTok{summary}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = log_pressure ~ I(1/TemperatureK), data = pressure)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.074183 -0.028889 -0.002508  0.021144  0.151494 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)        1.827e+01  4.429e-02   412.4   <2e-16 ***
+## I(1/TemperatureK) -7.301e+03  1.822e+01  -400.7   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.04874 on 17 degrees of freedom
+## Multiple R-squared:  0.9999, Adjusted R-squared:  0.9999 
+## F-statistic: 1.606e+05 on 1 and 17 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\subparagraph{(5) Add the regression line to the
+plot}\label{add-the-regression-line-to-the-plot}
+
+\subparagraph{Here's the complete R code for the entire
+process:}\label{heres-the-complete-r-code-for-the-entire-process}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load the pressure data set}
+\FunctionTok{data}\NormalTok{(pressure)}
+\FunctionTok{head}\NormalTok{(pressure)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   temperature pressure
+## 1           0   0.0002
+## 2          20   0.0012
+## 3          40   0.0060
+## 4          60   0.0300
+## 5          80   0.0900
+## 6         100   0.2700
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Transform the data}
+\NormalTok{pressure}\SpecialCharTok{$}\NormalTok{TemperatureK }\OtherTok{\textless{}{-}}\NormalTok{ pressure}\SpecialCharTok{$}\NormalTok{temperature }\SpecialCharTok{+} \DecValTok{273}
+\NormalTok{pressure}\SpecialCharTok{$}\NormalTok{log\_pressure }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(pressure}\SpecialCharTok{$}\NormalTok{pressure)}
+
+\CommentTok{\# Plot the transformed data}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ pressure}\SpecialCharTok{$}\NormalTok{TemperatureK, pressure}\SpecialCharTok{$}\NormalTok{log\_pressure,}
+     \AttributeTok{xlab =} \StringTok{"1 / Temperature (1/K)"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Log(Pressure)"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Clausius{-}Clapeyron Plot"}\NormalTok{)}
+
+\CommentTok{\# Fit a regression line}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(log\_pressure }\SpecialCharTok{\textasciitilde{}} \FunctionTok{I}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ TemperatureK), }\AttributeTok{data =}\NormalTok{ pressure)}
+\FunctionTok{summary}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = log_pressure ~ I(1/TemperatureK), data = pressure)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.074183 -0.028889 -0.002508  0.021144  0.151494 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)        1.827e+01  4.429e-02   412.4   <2e-16 ***
+## I(1/TemperatureK) -7.301e+03  1.822e+01  -400.7   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.04874 on 17 degrees of freedom
+## Multiple R-squared:  0.9999, Adjusted R-squared:  0.9999 
+## F-statistic: 1.606e+05 on 1 and 17 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add the regression line to the plot}
+\FunctionTok{abline}\NormalTok{(fit, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{3220103172_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+
+\end{document}
