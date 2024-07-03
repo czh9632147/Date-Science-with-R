@@ -1,0 +1,126 @@
+---
+title: "Ch3"
+author: "CZH"
+date: "2024-07-03"
+output:
+  pdf_document: default
+  html_document: default
+---
+## Load data
+Copy and paste the code chunk below and read it in to your RStudio to load the five datasets we will use in this section.
+```{r}
+library(tidyverse)
+ #National Parks in California
+ ca <- read_csv("data/ca.csv") 
+ #Acadia National Park
+ acadia <- read_csv("data/acadia.csv")
+ #Southeast US National Parks
+ se <- read_csv("data/se.csv")
+ #2016 Visitation for all Pacific West National Parks
+ visit_16 <- read_csv("data/visit_16.csv")
+ #All Nationally designated sites in Massachusetts
+ mass <- read_csv("data/mass.csv")
+```
+
+## Plot
+To add a geom to the plot use + operator. Because we have two continuous variables, let’s use geom_point() first and then assign x and y aesthetics ( aes ):
+```{r}
+ggplot(data = ca) +
+geom_point(aes(x = year, y = visitors))
+```
+
+## Building your plots iteratively
+ Building plots with ggplot is typically an iterative process. We start by defining the dataset we’ll use, lay the axes. We can distinguish each park by added the color argument to the aes:
+
+```{r}
+ggplot(data = ca) +
+geom_point(aes(x = year, y = visitors, color = park_name))
+```
+
+## Customizing plots
+Take a look at the ggplot2 cheat sheet, and think of ways you could improve the plot.\
+ Now, let’s capitalize the x and y axis labels and add a main title to the figure. I also like to remove that standard gray background using a different theme. Many themes come built into the ggplot2 package. My preference is theme_bw() but once you start typing theme_ a list of options will pop up. The last thing I’m going to do is remove the legend title.
+```{r}
+ggplot(data = ca) +
+ geom_point(aes(x = year, y = visitors, color = park_name)) +
+ labs(x = "Year",
+ y = "Visitation",
+ title = "California National Park Visitation") +
+ theme_bw() +
+ theme(legend.title=element_blank())
+```
+
+## Faceting
+ ggplot has a special technique called faceting that allows the user to split one plot into multiple plots based on data in the dataset. We will use it to make a plot of park visitation by state:\
+You can also embed plots, for example:
+```{r}
+ggplot(data = se) +
+geom_point(aes(x = year, y = visitors)) +
+facet_wrap(~ state)
+```
+We can now make the faceted plot by splitting further by park using park_name (within a single plot):
+```{r}
+ggplot(data = se) +
+geom_point(aes(x = year, y = visitors, color = park_name)) +
+facet_wrap(~ state, scales = "free")
+```
+## Geometric objects (geoms)
+ A geom is the geometrical object that a plot uses to represent data. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms, line charts use line geoms, boxplots use boxplot geoms, and so on. Scatterplots break the trend; they use the point geom. You can use different geoms to plot the same data. To change the geom in your plot, change the geom function that you add to ggplot() . Let’s look at a few ways of viewing the distribution of annual visitation ( visitors ) for each park ( park_name ).
+```{r}
+ggplot(data = se) + 
+geom_jitter(aes(x = park_name, y = visitors, color = park_name), 
+width = 0.1, 
+alpha = 0.4) +
+ coord_flip() +
+ theme(legend.position = "none")
+```
+```{r}
+ggplot(se, aes(x = park_name, y = visitors)) +
+geom_boxplot() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+None of these are great for visualizing data over time. We can use geom_line() in the same way we used geom_point .
+```{r}
+ ggplot(se, aes(x = year, y = visitors, color = park_name)) +
+ geom_line()
+```
+
+ To display multiple geoms in the same plot, add multiple geom functions to ggplot() : \
+ geom_smooth allows you to view a smoothed mean of data. Here we look at the smooth mean of visitation over time to Acadia National Park:
+```{r}
+ggplot(data = acadia) +
+geom_point(aes(x = year, y = visitors)) +
+geom_line(aes(x = year, y = visitors)) +
+geom_smooth(aes(x = year, y = visitors)) +
+labs(title = "Acadia National Park Visitation",
+y = "Visitation",
+x = "Year") +
+theme_bw()
+```
+## Bar charts
+Next, let’s take a look at a bar chart. Bar charts seem simple, but they are interesting because they reveal something subtle about plots. Consider a basic bar chart, as drawn with geom_bar(). The following chart displays the total number of parks in each state within the Pacific West region.
+```{r}
+ggplot(data = visit_16, aes(x = state)) +
+geom_bar()
+```
+
+## Position adjustments
+There’s one more piece of magic associated with bar charts. You can colour a bar chart using either the color aesthetic, or, more usefully, fill :
+```{r}
+ggplot(data = visit_16, aes(x = state, y = visitors, fill = park_name)) +
+geom_bar(stat = "identity")
+```
+
+The stacking is performed automatically by the position adjustment specified by the position argument. If you don’t want a stacked bar chart, you can use dodge .\
+ -position = "dodge" places overlapping objects directly beside one another. This makes it easier to compare individual values.
+```{r}
+ggplot(data = visit_16, aes(x = state, y = visitors, fill = park_name)) + 
+  geom_bar(stat = "identity", position = "dodge")
+```
+
+
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
