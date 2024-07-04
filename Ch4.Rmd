@@ -1,0 +1,304 @@
+---
+title: "Ch4"
+author: "CZH"
+date: "2024-07-04"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Explore the gapminder data.frame
+
+```{r}
+library(gapminder)
+library(tidyverse)
+head(gapminder) # shows first 6
+tail(gapminder) # shows last 6
+head(gapminder, 10) # shows first X that you indicate
+str(gapminder) # ?str - displays the structure of an object
+```
+
+## dplyr basics
+There are five dplyr functions that you will use to do the vast majority of data manipulations:\
+filter(): pick observations by their values\
+select(): pick variables by their names\
+mutate(): create new variables with functions of existing variables\
+summarise(): collapse many values down to a single summary\
+arrange(): reorder the rows\
+These can all be used in conjunction with group_by() which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These six functions provide the verbs for a language of data manipulation.
+All verbs work similarly:\
+1. The first argument is a data frame.\
+2. The subsequent arguments describe what to do with the data frame. You can refer to columns in the data frame directly without using $.\
+3. The result is a new data frame.\
+Together these properties make it easy to chain together multiple simple steps to achieve a complex result
+
+#### filter() subsets data row-wise (observations)
+You will want to isolate bits of your data; maybe you want to only look at a single country or a few years. R calls this subsetting.\
+filter() is a function in dplyr that takes logical expressions and returns the rows for which all are TRUE.
+```{r}
+filter(gapminder, lifeExp < 29)
+```
+Let’s try another: “Filter the gapminder data for the country Mexico”.
+```{r}
+filter(gapminder, country == "Mexico")
+```
+How about if we want two country names? We can’t use the == operator here, because it can only operate on one thing at a time. We will use the %in% operator:
+```{r}
+filter(gapminder, country %in% c("Mexico", "Peru"))
+```
+How about if we want Mexico in 2002? You can pass filter different criteria:
+```{r}
+filter(gapminder, country == "Mexico", year == 2002)
+```
+
+#### select() subsets data column-wise (variables)
+We use select() to subset the data on variables or columns.\
+We can select multiple columns with a comma, after we specify the data frame (gapminder).
+```{r}
+gap1 <- dplyr::select(gapminder, year, country, lifeExp)
+head(gap1, 3)
+```
+We can select a range of variables with a semicolon.
+```{r}
+gap2 <- dplyr::select(gapminder, year:lifeExp)
+head(gap2, 3)
+```
+We can select columns with indices.
+```{r}
+gap3 <- dplyr::select(gapminder, 1, 2, 4)
+head(gap3, 3)
+```
+We can also use - to deselect columns.
+```{r}
+gap4 <- dplyr::select(gapminder, -continent, -lifeExp) # you can use
+head(gap4, 3)
+```
+#### Use select() and filter() together
+Let’s filter for Cambodia and remove the continent and lifeExp columns. We’ll save this as a variable. Actually, as two temporary variables, which means that for the second one we need to operate on gap_cambodia, not gapminder.
+```{r}
+gap_cambodia <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- dplyr::select(gap_cambodia, -continent, -lifeExp)
+head(gap_cambodia2)
+```
+#### Meet the new pipe %>% (|>) operator
+```{r}
+gapminder |> head(3)
+```
+This means that:
+```{r}
+gap_cambodia <- gapminder |> filter(country == "Cambodia")
+gap_cambodia2 <- gap_cambodia |> dplyr::select(-continent, -lifeExp)
+```
+We can use the pipe to chain those two operations together:
+```{r}
+gap_cambodia <- gapminder |>
+ filter(country == "Cambodia") |>
+ dplyr::select(-continent, -lifeExp)
+```
+
+#### mutate() adds new variables
+Imagine we want to know each country’s annual GDP. We can multiply pop by gdpPercap to create a new column named gdp.
+```{r}
+gapminder |>
+mutate(gdp = pop * gdpPercap)
+```
+
+#### group_by() operates on groups
+What if we wanted to know the total population on each continent in 2002? Answering this question requires a grouping variable.\
+By using group_by() we can set our grouping variable to continent and create a new column called cont_pop that will add up all country populations by their associated continents.
+```{r}
+gapminder |>
+ filter(year == 2002) |>
+ group_by(continent) |>
+ mutate(cont_pop = sum(pop))
+```
+
+#### summarize() with group_by()
+We want to operate on a group, but actually collapse or distill the output from that group. The summarize() function will do that for us.
+```{r}
+gapminder |>
+ group_by(continent) |>
+ summarize(cont_pop = sum(pop)) |>
+ ungroup()
+```
+summarize() will actually only keep the columns that are grouped_by or summarized. So if we wanted to keep other columns, we’d have to do have a few more steps. ungroup() removes the grouping and it’s good to get in the habit of using it after a group_by().\
+We can use more than one grouping variable. Let’s get total populations by continent and year.
+```{r}
+gapminder |>
+ group_by(continent, year) |>
+ summarize(cont_pop = sum(pop))
+```
+
+#### arrange() orders columns
+This is ordered alphabetically, which is cool. But let’s say we wanted to order it in ascending order for year. The dplyr function is arrange().
+```{r}
+gapminder |>
+ group_by(continent, year) |>
+ summarize(cont_pop = sum(pop)) |>
+ arrange(year)
+```
+## Compare to base R
+Instead of calculating the max for each country like we did with dplyr above, here we will calculate the max for one country, Mexico.
+```{r}
+gapminder <- read.csv('data/gapminder.csv', stringsAsFactors = FALSE)
+x1 <- gapminder[ , c('country', 'year', 'pop', 'gdpPercap') ] # subse
+mex <- x1[x1$country == "Mexico", ] # subset rows
+mex$gdp <- mex$pop * mex$gdpPercap # add new columns
+mex$max_gdp <- max(mex$gdp)
+```
+
+## Joining datasets
+Most of the time you will have data coming from different places or indifferent files, and you want to put them together so you can analyze them. Datasets you’ll be joining can be called relational data, because it has some kind of relationship between them that you’ll be acting upon. In the tidyverse, combining data that has a relationship is called “joining”.\
+We will only talk about this briefly here, but you can refer to this more as youhave your own datasets that you want to join. This describes the figure above:\
+left_join keeps everything from the left table and matches as much as it can from the right table. In R, the first thing that you type will be the left table (because it’s on the left)\
+right_join keeps everything from the right table and matches as much as it can from the left table\
+inner_join only keeps the observations that are similar between the two tables\
+full_join keeps all observations from both tables.\
+Let’s play with these CO2 emissions data to illustrate:\
+```{r}
+## read in the data. (same URL as yesterday, with co2.csv instead of
+co2 <- read_csv("data/co2.csv")
+## explore
+co2 |> head()
+```
+```{r}
+co2 |> dim() # 12
+```
+```{r}
+## create new variable that is only 2007 data
+gap_2007 <- gapminder |>
+filter(year == 2007)
+gap_2007 |> dim() # 142
+```
+```{r}
+## left_join gap_2007 to co2
+lj <- left_join(gap_2007, co2, by = "country")
+## explore
+lj |> dim() #142
+```
+```{r}
+lj |> head(3) # lots of NAs in the co2_2017 columm
+```
+```{r}
+## right_join gap_2007 and co2
+rj <- right_join(gap_2007, co2, by = "country")
+## explore
+rj |> dim() # 12
+```
+```{r}
+rj |> head(3)
+```
+
+## Data Wrangling: tidyr
+An example of data in a wide format is the AirPassengers dataset which provides information on monthly airline passenger numbers from 1949-1960. You’ll notice that each row is a single year and the columns are each month Jan - Dec.
+```{r}
+AirPassengers
+```
+Often, data must be reshaped for it to become tidy data. What does that mean? There are four main verbs we’ll use, which are essentially pairs of opposites:\
+turn columns into rows (gather()),\
+turn rows into columns (spread()),\
+turn a character column into multiple columns (separate()),\
+turn multiple character columns into a single column (unite())\
+
+## Explore gapminder dataset
+```{r}
+library(tidyverse)
+## wide format
+gap_wide <- readr::read_csv('data/gapminder_wide.csv')
+gapminder <- readr::read_csv('data/gapminder.csv')
+#head(gap_wide)
+str(gap_wide)
+```
+We need to name two new variables in the key-value pair, one for the key, one for the value. It can be hard to wrap your mind around this, so let’s give it a try. Let’s name them obstype_year and obs_values.
+```{r}
+gap_long <- gap_wide |>
+ gather(key = obstype_year,
+  value = obs_values)
+str(gap_long)
+```
+```{r}
+head(gap_long)
+```
+```{r}
+tail(gap_long)
+```
+```{r}
+gap_long <- gap_wide |>
+  gather(key = obstype_year,
+        value = obs_values,
+        dplyr::starts_with('pop'),
+        dplyr::starts_with('lifeExp'),
+        dplyr::starts_with('gdpPercap')) # here i'm listing all the
+str(gap_long)
+```
+```{r}
+head(gap_long)
+```
+```{r}
+tail(gap_long)
+```
+Success! And there is another way that is nice to use if your columns don’t follow such a structured pattern: you can exclude the columns you don’t want.
+```{r}
+gap_long <- gap_wide |>
+  gather(key = obstype_year,
+         value = obs_values,
+         -continent, -country)
+str(gap_long)
+```
+```{r}
+head(gap_long, 3)
+```
+?separate –> the main arguments are separate(data, col, into, sep ...). So we need to specify which column we want separated, name the new columns that we want to create, and specify what we want it to separate by. Since the obstype_year variable has observation types and years separated by a _, we’ll use that.
+```{r}
+gap_long <- gap_wide |>
+  gather(key = obstype_year,
+         value = obs_values,
+         -continent, -country) |>
+  separate(obstype_year,
+           into = c('obs_type','year'),
+           sep = "_",
+          convert = TRUE) # this ensures that the year column is an i
+str(gap_long)
+```
+```{r}
+head(gap_long, 3)
+```
+
+## Plot long format data
+The long format is the preferred format for plotting with ggplot2. Let’s look at an example by plotting just Canada’s life expectancy.
+```{r}
+canada_df <- gap_long |>
+  filter(obs_type == "lifeExp",
+         country == "Canada")
+ggplot(canada_df, aes(x = year, y = obs_values)) +
+  geom_line()
+```
+We can also look at all countries in the Americas:
+```{r}
+life_df <- gap_long |>
+  filter(obs_type == "lifeExp",
+         continent == "Americas")
+ggplot(life_df, aes(x = year, y = obs_values, color = country)) +
+  geom_line()
+```
+
+## spread()
+The function spread() is used to transform data from long to wide format.
+```{r}
+gap_normal <- gap_long |>
+  spread(obs_type, obs_values)
+dim(gap_normal)
+```
+```{r}
+dim(gapminder)
+```
+```{r}
+names(gap_normal)
+```
+```{r}
+names(gapminder)
+```
+Now we’ve got a dataframe gap_normal with the same dimensions as the original gapminder.
+
+
+
