@@ -1,0 +1,1113 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Ch6},
+  pdfauthor={CZH},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Ch6}
+\author{CZH}
+\date{2024-07-06}
+
+\begin{document}
+\maketitle
+
+\subsection{Test Case: Birth weight
+data}\label{test-case-birth-weight-data}
+
+Included in R already:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(MASS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'MASS'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(conflicted)}
+\FunctionTok{data}\NormalTok{(birthwt)}
+\FunctionTok{summary}\NormalTok{(birthwt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       low              age             lwt             race      
+##  Min.   :0.0000   Min.   :14.00   Min.   : 80.0   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:19.00   1st Qu.:110.0   1st Qu.:1.000  
+##  Median :0.0000   Median :23.00   Median :121.0   Median :1.000  
+##  Mean   :0.3122   Mean   :23.24   Mean   :129.8   Mean   :1.847  
+##  3rd Qu.:1.0000   3rd Qu.:26.00   3rd Qu.:140.0   3rd Qu.:3.000  
+##  Max.   :1.0000   Max.   :45.00   Max.   :250.0   Max.   :3.000  
+##      smoke             ptl               ht                ui        
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000  
+##  Median :0.0000   Median :0.0000   Median :0.00000   Median :0.0000  
+##  Mean   :0.3915   Mean   :0.1958   Mean   :0.06349   Mean   :0.1481  
+##  3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:0.00000   3rd Qu.:0.0000  
+##  Max.   :1.0000   Max.   :3.0000   Max.   :1.00000   Max.   :1.0000  
+##       ftv              bwt      
+##  Min.   :0.0000   Min.   : 709  
+##  1st Qu.:0.0000   1st Qu.:2414  
+##  Median :0.0000   Median :2977  
+##  Mean   :0.7937   Mean   :2945  
+##  3rd Qu.:1.0000   3rd Qu.:3487  
+##  Max.   :6.0000   Max.   :4990
+\end{verbatim}
+
+\paragraph{Make it readable!}\label{make-it-readable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(birthwt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "low"   "age"   "lwt"   "race"  "smoke" "ptl"   "ht"    "ui"    "ftv"  
+## [10] "bwt"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(birthwt) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"birthwt.below.2500"}\NormalTok{, }\StringTok{"mother.age"}\NormalTok{,}
+                       \StringTok{"mother.weight"}\NormalTok{, }\StringTok{"race"}\NormalTok{,}
+                       \StringTok{"mother.smokes"}\NormalTok{, }\StringTok{"previous.prem.labor"}\NormalTok{,}
+                       \StringTok{"hypertension"}\NormalTok{, }\StringTok{"uterine.irr"}\NormalTok{,}
+                       \StringTok{"physician.visits"}\NormalTok{, }\StringTok{"birthwt.grams"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's make all the factors more descriptive.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt}\SpecialCharTok{$}\NormalTok{race }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"other"}\NormalTok{)[birthwt}\SpecialCharTok{$}\NormalTok{race])}
+\NormalTok{birthwt}\SpecialCharTok{$}\NormalTok{mother.smokes }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)[birthwt}\SpecialCharTok{$}\NormalTok{mother.smokes }\SpecialCharTok{+} \DecValTok{1}\NormalTok{])}
+\NormalTok{birthwt}\SpecialCharTok{$}\NormalTok{uterine.irr }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)[birthwt}\SpecialCharTok{$}\NormalTok{uterine.irr }\SpecialCharTok{+} \DecValTok{1}\NormalTok{])}
+\NormalTok{birthwt}\SpecialCharTok{$}\NormalTok{hypertension }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"No"}\NormalTok{, }\StringTok{"Yes"}\NormalTok{)[birthwt}\SpecialCharTok{$}\NormalTok{hypertension }\SpecialCharTok{+} \DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Bar plot for race}\label{bar-plot-for-race}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ race))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Count of Mother\textquotesingle{}s Race in Springfield MA, 1986"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-5-1.pdf} \#\#\#\#
+Scatter plot for mother's ages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(birthwt), }\AttributeTok{y =}\NormalTok{ mother.age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}number\textquotesingle{}}\NormalTok{, }\AttributeTok{title =} \StringTok{"Mother\textquotesingle{}s Ages in Springfield MA, 1986"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-6-1.pdf} \#\#\#\#
+Sorted mother's ages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt }\SpecialCharTok{|\textgreater{}} \FunctionTok{arrange}\NormalTok{(mother.age) }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(birthwt), }\AttributeTok{y =}\NormalTok{ mother.age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}number\textquotesingle{}}\NormalTok{, }\AttributeTok{title =} \StringTok{"Mother\textquotesingle{}s Ages in Springfield MA, 1986"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-7-1.pdf} \#\#\#\#
+Birth weight versus mother's ages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mother.age, }\AttributeTok{y =}\NormalTok{ birthwt.grams))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Birth Weight by Mother\textquotesingle{}s Age in Springfield MA, 1986"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-8-1.pdf} \#\#\#\#
+Boxplot Let's fit some models to the data pertaining to our outcome(s)
+of interest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mother.smokes, }\AttributeTok{y =}\NormalTok{ birthwt.grams))}\SpecialCharTok{+}  
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Birth Weight by Mother\textquotesingle{}s Smoking Habit"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Birth Weight (g)"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Mother Smokes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\paragraph{Basic statistical testing}\label{basic-statistical-testing}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{ (birthwt}\SpecialCharTok{$}\NormalTok{birthwt.grams[birthwt}\SpecialCharTok{$}\NormalTok{mother.smokes }\SpecialCharTok{==} \StringTok{"Yes"}\NormalTok{], }
+\NormalTok{        birthwt}\SpecialCharTok{$}\NormalTok{birthwt.grams[birthwt}\SpecialCharTok{$}\NormalTok{mother.smokes }\SpecialCharTok{==} \StringTok{"No"}\NormalTok{], }\AttributeTok{var.equal =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  birthwt$birthwt.grams[birthwt$mother.smokes == "Yes"] and birthwt$birthwt.grams[birthwt$mother.smokes == "No"]
+## t = -2.6529, df = 187, p-value = 0.008667
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -494.79735  -72.75612
+## sample estimates:
+## mean of x mean of y 
+##  2771.919  3055.696
+\end{verbatim}
+
+Does this difference match the linear model?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.1} \OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mother.smokes, }\AttributeTok{data=}\NormalTok{birthwt)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ mother.smokes, data = birthwt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2062.9  -475.9    34.3   545.1  1934.3 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       3055.70      66.93  45.653  < 2e-16 ***
+## mother.smokesYes  -283.78     106.97  -2.653  0.00867 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 717.8 on 187 degrees of freedom
+## Multiple R-squared:  0.03627,    Adjusted R-squared:  0.03112 
+## F-statistic: 7.038 on 1 and 187 DF,  p-value: 0.008667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mother.age, }\AttributeTok{data=}\NormalTok{birthwt)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ mother.age, data = birthwt)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2294.78  -517.63    10.51   530.80  1774.92 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2655.74     238.86   11.12   <2e-16 ***
+## mother.age     12.43      10.02    1.24    0.216    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 728.2 on 187 degrees of freedom
+## Multiple R-squared:  0.008157,   Adjusted R-squared:  0.002853 
+## F-statistic: 1.538 on 1 and 187 DF,  p-value: 0.2165
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(linear.model}\FloatTok{.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(linear.model}\FloatTok{.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-5.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-6.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-7.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-13-8.pdf}
+
+\paragraph{Detecting Outliers}\label{detecting-outliers}
+
+These are the default diagnostic plots for the analysis. Note that our
+oldest mother and her heaviest child are greatly skewing this analysis
+as we suspected.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt.noout }\OtherTok{\textless{}{-}}\NormalTok{ birthwt }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(mother.age }\SpecialCharTok{\textless{}=} \DecValTok{40}\NormalTok{)}
+\NormalTok{linear.model}\FloatTok{.3} \OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mother.age, }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ mother.age, data = birthwt.noout)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2245.89  -511.24    26.45   540.09  1655.48 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 2833.273    244.954   11.57   <2e-16 ***
+## mother.age     4.344     10.349    0.42    0.675    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 717.2 on 186 degrees of freedom
+## Multiple R-squared:  0.0009461,  Adjusted R-squared:  -0.004425 
+## F-statistic: 0.1761 on 1 and 186 DF,  p-value: 0.6752
+\end{verbatim}
+
+\paragraph{More complex models}\label{more-complex-models}
+
+Add in smoking behavior:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.3}\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}} \SpecialCharTok{+}\NormalTok{ mother.smokes }\SpecialCharTok{+}\NormalTok{ mother.age, }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.3}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ +mother.smokes + mother.age, data = birthwt.noout)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2081.22  -459.82    43.56   548.22  1551.51 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      2954.582    246.280  11.997   <2e-16 ***
+## mother.smokesYes -265.756    105.605  -2.517   0.0127 *  
+## mother.age          3.621     10.208   0.355   0.7232    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 707.1 on 185 degrees of freedom
+## Multiple R-squared:  0.03401,    Adjusted R-squared:  0.02357 
+## F-statistic: 3.257 on 2 and 185 DF,  p-value: 0.04072
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(linear.model}\FloatTok{.3}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-16-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-16-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-16-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-16-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.3}\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ mother.age }\SpecialCharTok{+}\NormalTok{ mother.smokes }\SpecialCharTok{+}\NormalTok{ race, }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.3}\NormalTok{b)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ mother.age + mother.smokes + race, 
+##     data = birthwt.noout)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2261.76  -422.49    15.98   512.00  1315.40 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      2986.405    260.897  11.447  < 2e-16 ***
+## mother.age         -5.050     10.056  -0.502 0.616136    
+## mother.smokesYes -410.656    108.635  -3.780 0.000212 ***
+## raceother           5.487    158.918   0.035 0.972492    
+## racewhite         442.799    154.023   2.875 0.004521 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 680.4 on 183 degrees of freedom
+## Multiple R-squared:  0.1153, Adjusted R-squared:  0.09592 
+## F-statistic:  5.96 on 4 and 183 DF,  p-value: 0.000157
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(linear.model}\FloatTok{.3}\NormalTok{b)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-18-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-18-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-18-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-18-4.pdf}
+
+\paragraph{Everything Must Go (In)}\label{everything-must-go-in}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.4} \OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ ., data = birthwt.noout)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -985.04 -274.13  -13.87  262.53 1146.50 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)          3360.5163   215.4112  15.600  < 2e-16 ***
+## birthwt.below.2500  -1116.3933    70.8578 -15.755  < 2e-16 ***
+## mother.age            -16.0321     6.4159  -2.499 0.013373 *  
+## mother.weight           1.9317     1.1208   1.723 0.086545 .  
+## raceother              68.8145   101.4451   0.678 0.498441    
+## racewhite             247.0241    96.4935   2.560 0.011302 *  
+## mother.smokesYes     -157.7041    68.6205  -2.298 0.022719 *  
+## previous.prem.labor    95.9825    65.3329   1.469 0.143573    
+## hypertensionYes      -185.2778   131.0126  -1.414 0.159060    
+## uterine.irrYes       -340.0918    88.8465  -3.828 0.000179 ***
+## physician.visits       -0.3519    29.5378  -0.012 0.990509    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 412.8 on 177 degrees of freedom
+## Multiple R-squared:  0.6851, Adjusted R-squared:  0.6673 
+## F-statistic: 38.51 on 10 and 177 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\paragraph{Everything Must Go (In), Except What Must
+Not}\label{everything-must-go-in-except-what-must-not}
+
+One of those variables was birthwt.below.2500 which is a function of the
+outcome.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{linear.model}\FloatTok{.4}\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{{-}}\NormalTok{ birthwt.below}\FloatTok{.2500}\NormalTok{, }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(linear.model}\FloatTok{.4}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ . - birthwt.below.2500, data = birthwt.noout)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1761.10  -454.81    46.43   459.78  1394.13 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         2545.584    323.204   7.876 3.21e-13 ***
+## mother.age           -12.111      9.909  -1.222 0.223243    
+## mother.weight          4.789      1.710   2.801 0.005656 ** 
+## raceother            155.605    156.564   0.994 0.321634    
+## racewhite            494.545    147.153   3.361 0.000951 ***
+## mother.smokesYes    -335.793    104.613  -3.210 0.001576 ** 
+## previous.prem.labor  -32.922    100.185  -0.329 0.742838    
+## hypertensionYes     -594.324    198.480  -2.994 0.003142 ** 
+## uterine.irrYes      -514.842    136.249  -3.779 0.000215 ***
+## physician.visits      -7.247     45.649  -0.159 0.874036    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 638 on 178 degrees of freedom
+## Multiple R-squared:  0.2435, Adjusted R-squared:  0.2052 
+## F-statistic: 6.365 on 9 and 178 DF,  p-value: 8.255e-08
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(linear.model}\FloatTok{.4}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-21-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-21-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-21-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-21-4.pdf}
+
+\paragraph{Generalized Linear Models}\label{generalized-linear-models}
+
+Maybe a linear increase in birth weight is less important than if it's
+below a threshold like 2500 grams (5.5 pounds). Let's fit a generalized
+linear model instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm}\FloatTok{.0} \OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{ (birthwt.below}\FloatTok{.2500} \SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{{-}}\NormalTok{ birthwt.grams, }\AttributeTok{data=}\NormalTok{birthwt.noout)}
+\FunctionTok{summary}\NormalTok{(glm}\FloatTok{.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = birthwt.below.2500 ~ . - birthwt.grams, data = birthwt.noout)
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)          0.729969   0.221195   3.300  0.00117 **
+## mother.age          -0.003512   0.006782  -0.518  0.60517   
+## mother.weight       -0.002559   0.001170  -2.187  0.03003 * 
+## raceother           -0.077742   0.107150  -0.726  0.46907   
+## racewhite           -0.221715   0.100709  -2.202  0.02898 * 
+## mother.smokesYes     0.159522   0.071595   2.228  0.02713 * 
+## previous.prem.labor  0.115465   0.068565   1.684  0.09393 . 
+## hypertensionYes      0.366400   0.135836   2.697  0.00766 **
+## uterine.irrYes       0.156531   0.093246   1.679  0.09497 . 
+## physician.visits     0.006177   0.031242   0.198  0.84350   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1906351)
+## 
+##     Null deviance: 40.484  on 187  degrees of freedom
+## Residual deviance: 33.933  on 178  degrees of freedom
+## AIC: 233.65
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(glm}\FloatTok{.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-23-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-23-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-23-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-23-4.pdf}
+
+The default value is a Gaussian model (a standard linear model). Change
+this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm}\FloatTok{.1} \OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{ (birthwt.below}\FloatTok{.2500} \SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{{-}}\NormalTok{ birthwt.grams, }\AttributeTok{data=}\NormalTok{birthwt.noout, }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\NormalTok{logit))}
+\FunctionTok{summary}\NormalTok{(glm}\FloatTok{.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = birthwt.below.2500 ~ . - birthwt.grams, family = binomial(link = logit), 
+##     data = birthwt.noout)
+## 
+## Coefficients:
+##                      Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)          1.721830   1.258897   1.368  0.17140   
+## mother.age          -0.027537   0.037718  -0.730  0.46534   
+## mother.weight       -0.015474   0.006919  -2.237  0.02532 * 
+## raceother           -0.395505   0.537685  -0.736  0.46199   
+## racewhite           -1.269006   0.527180  -2.407  0.01608 * 
+## mother.smokesYes     0.931733   0.402359   2.316  0.02058 * 
+## previous.prem.labor  0.539549   0.345413   1.562  0.11828   
+## hypertensionYes      1.860521   0.697502   2.667  0.00764 **
+## uterine.irrYes       0.766517   0.458951   1.670  0.09489 . 
+## physician.visits     0.063402   0.172431   0.368  0.71310   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 233.92  on 187  degrees of freedom
+## Residual deviance: 201.15  on 178  degrees of freedom
+## AIC: 221.15
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(glm}\FloatTok{.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-25-1.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-25-2.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-25-3.pdf}
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-25-4.pdf}
+
+\paragraph{What Do We Do With This,
+Anyway?}\label{what-do-we-do-with-this-anyway}
+
+Let's take a subset of this data to do predictions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{odds }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(birthwt.noout), }\AttributeTok{by=}\DecValTok{2}\NormalTok{)}
+\NormalTok{birthwt.in }\OtherTok{\textless{}{-}}\NormalTok{ birthwt.noout[odds,]}
+\NormalTok{birthwt.out }\OtherTok{\textless{}{-}}\NormalTok{ birthwt.noout[}\SpecialCharTok{{-}}\NormalTok{odds,]}
+\NormalTok{linear.model.half }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{ (birthwt.grams }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{{-}}\NormalTok{ birthwt.below}\FloatTok{.2500}\NormalTok{, }\AttributeTok{data=}\NormalTok{birthwt.in)}
+\FunctionTok{summary}\NormalTok{ (linear.model.half)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = birthwt.grams ~ . - birthwt.below.2500, data = birthwt.in)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1705.17  -303.11    26.48   427.18  1261.57 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)         2514.891    450.245   5.586 2.81e-07 ***
+## mother.age             7.052     14.935   0.472  0.63801    
+## mother.weight          2.683      2.885   0.930  0.35501    
+## raceother            113.948    224.519   0.508  0.61312    
+## racewhite            466.219    204.967   2.275  0.02548 *  
+## mother.smokesYes    -217.218    154.521  -1.406  0.16349    
+## previous.prem.labor -206.093    143.726  -1.434  0.15530    
+## hypertensionYes     -653.594    281.795  -2.319  0.02280 *  
+## uterine.irrYes      -547.884    193.386  -2.833  0.00577 ** 
+## physician.visits    -130.202     81.400  -1.600  0.11346    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 643.7 on 84 degrees of freedom
+## Multiple R-squared:  0.2585, Adjusted R-squared:  0.1791 
+## F-statistic: 3.254 on 9 and 84 DF,  p-value: 0.001942
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt.predict }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{ (linear.model.half)}
+\FunctionTok{cor}\NormalTok{ (birthwt.in}\SpecialCharTok{$}\NormalTok{birthwt.grams, birthwt.predict)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.508442
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =}\NormalTok{ birthwt.out}\SpecialCharTok{$}\NormalTok{birthwt.grams, }\AttributeTok{y =}\NormalTok{ birthwt.predict) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{ (}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthwt.predict.out }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{ (linear.model.half, birthwt.out)}
+\FunctionTok{cor}\NormalTok{ (birthwt.out}\SpecialCharTok{$}\NormalTok{birthwt.grams, birthwt.predict.out)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3749431
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =}\NormalTok{ birthwt.out}\SpecialCharTok{$}\NormalTok{birthwt.grams, }\AttributeTok{y =}\NormalTok{ birthwt.predict.out) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{ (}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\subsection{Random number generators}\label{random-number-generators}
+
+Example: runif, where we know where it started
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0.33321581 0.66122657 0.49596972 0.90563481 0.39354492 0.56191695
+##  [7] 0.04051549 0.23280271 0.13803216 0.06414346
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0.50747820 0.30676851 0.42690767 0.69310208 0.08513597 0.22543662
+##  [7] 0.27453052 0.27230507 0.61582931 0.42967153
+\end{verbatim}
+
+\paragraph{Basic version: Linear Congruential
+Generator}\label{basic-version-linear-congruential-generator}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seed }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{new.random }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{ (}\AttributeTok{a=}\DecValTok{5}\NormalTok{, }\AttributeTok{c=}\DecValTok{12}\NormalTok{, }\AttributeTok{m=}\DecValTok{16}\NormalTok{) \{}
+\NormalTok{  out }\OtherTok{\textless{}{-}}\NormalTok{ (a}\SpecialCharTok{*}\NormalTok{seed }\SpecialCharTok{+}\NormalTok{ c) }\SpecialCharTok{\%\%}\NormalTok{ m}
+\NormalTok{  seed }\OtherTok{\textless{}\textless{}{-}}\NormalTok{ out}
+  \FunctionTok{return}\NormalTok{(out)}
+\NormalTok{\}}
+\NormalTok{out.length }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{variates }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{ (}\ConstantTok{NA}\NormalTok{, out.length)}
+\ControlFlowTok{for}\NormalTok{ (kk }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{out.length) variates[kk] }\OtherTok{\textless{}{-}} \FunctionTok{new.random}\NormalTok{()}
+\NormalTok{variates}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 14  2  6 10 14  2  6 10 14  2  6 10 14  2  6 10 14  2  6 10
+\end{verbatim}
+
+Try again. Period 8:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variates }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{ (}\ConstantTok{NA}\NormalTok{, out.length)}
+\ControlFlowTok{for}\NormalTok{ (kk }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{out.length) variates[kk] }\OtherTok{\textless{}{-}} \FunctionTok{new.random}\NormalTok{(}\AttributeTok{a=}\DecValTok{131}\NormalTok{, }\AttributeTok{c=}\DecValTok{7}\NormalTok{, }\AttributeTok{m=}\DecValTok{16}\NormalTok{)}
+\NormalTok{variates}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  5  6  9  2 13 14  1 10  5  6  9  2 13 14  1 10  5  6  9  2
+\end{verbatim}
+
+Try again, again. Period 16:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variates }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{ (}\ConstantTok{NA}\NormalTok{, out.length)}
+\ControlFlowTok{for}\NormalTok{ (kk }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{out.length) variates[kk] }\OtherTok{\textless{}{-}} \FunctionTok{new.random}\NormalTok{(}\AttributeTok{a=}\DecValTok{129}\NormalTok{, }\AttributeTok{c=}\DecValTok{7}\NormalTok{, }\AttributeTok{m=}\DecValTok{16}\NormalTok{)}
+\NormalTok{variates}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  9  0  7 14  5 12  3 10  1  8 15  6 13  4 11  2  9  0  7 14
+\end{verbatim}
+
+Try again, at last. Numerical Recipes uses:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variates }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{ (}\ConstantTok{NA}\NormalTok{, out.length)}
+\ControlFlowTok{for}\NormalTok{ (kk }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{out.length) variates[kk] }\OtherTok{\textless{}{-}} \FunctionTok{new.random}\NormalTok{(}\AttributeTok{a=}\DecValTok{1664545}\NormalTok{, }\AttributeTok{c=}\DecValTok{1013904223}\NormalTok{, }\AttributeTok{m=}\DecValTok{2}\SpecialCharTok{\^{}}\DecValTok{32}\NormalTok{)}
+\NormalTok{variates}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1037207853 2090831916 4106096907  768378826 3835752553 1329121000
+##  [7] 2125006663 2668506502 3581687205 2079234980 2067291011 2197025090
+## [13] 3748878561 2913996384  758844863 4029469438 2836748829 1458315036
+## [19] 2399149563 2766656186
+\end{verbatim}
+
+\subsection{A few distributions of
+interest:}\label{a-few-distributions-of-interest}
+
+Uniform(0,1)\\
+Bernoulli(p)\\
+Binomial(n,p)\\
+Gaussian(0,1)\\
+Exponential(1)\\
+Gamma(a)\\
+
+\subsection{Suppose we were working with the Exponential
+distribution.}\label{suppose-we-were-working-with-the-exponential-distribution.}
+
+\paragraph{rexp() generates variates from the
+distribution.}\label{rexp-generates-variates-from-the-distribution.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rexp}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3033113 0.1354755 2.3276229 0.7291238 1.2883101 0.6722683
+\end{verbatim}
+
+\paragraph{dexp() gives the probability density
+function.}\label{dexp-gives-the-probability-density-function.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dexp}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.000000000 0.367879441 0.135335283 0.049787068 0.018315639 0.006737947
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{this.range }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{50}\SpecialCharTok{/}\DecValTok{5}
+\FunctionTok{plot}\NormalTok{ (this.range, }\FunctionTok{dexp}\NormalTok{(this.range), }\AttributeTok{ty=}\StringTok{"l"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{dexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.5}\NormalTok{), }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{dexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.2}\NormalTok{), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-39-1.pdf} \#\#\#\#
+pexp() gives the cumulative distribution function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pexp}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0000000 0.6321206 0.8646647 0.9502129 0.9816844 0.9932621
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{this.range }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{50}\SpecialCharTok{/}\DecValTok{5}
+\FunctionTok{plot}\NormalTok{ (this.range, }\FunctionTok{pexp}\NormalTok{(this.range), }\AttributeTok{ty=}\StringTok{"l"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{pexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.5}\NormalTok{), }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{pexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.2}\NormalTok{), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-41-1.pdf}
+
+\paragraph{qexp() gives the quantiles.}\label{qexp-gives-the-quantiles.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qexp}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in qexp(0:5): NaNs produced
+\end{verbatim}
+
+\begin{verbatim}
+## [1]   0 Inf NaN NaN NaN NaN
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{this.range }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.01}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{ (this.range, }\FunctionTok{qexp}\NormalTok{(this.range), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{ty=}\StringTok{"l"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{qexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.5}\NormalTok{), }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{ (this.range, }\FunctionTok{qexp}\NormalTok{(this.range, }\AttributeTok{rate=}\FloatTok{0.2}\NormalTok{), }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-43-1.pdf}
+
+\subsection{S\&P 500}\label{sp-500}
+
+The Standard and Poor's 500, or simply the S\&P 500, is a stock market
+index tracking the stock performance of 500 large companies listed on
+exchanges in the United States. It is one of the most commonly followed
+equity indices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\NormalTok{SP }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"data/Stock\_Bond.xls"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(Date, }\StringTok{\textasciigrave{}}\AttributeTok{S\&P\_AC}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{Index =} \StringTok{\textasciigrave{}}\AttributeTok{S\&P\_AC}\StringTok{\textasciigrave{}}\NormalTok{)}
+\NormalTok{SP }\SpecialCharTok{|\textgreater{}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Date, }\AttributeTok{y =}\NormalTok{ Index)) }\SpecialCharTok{+} \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-44-1.pdf}\\
+The price \(p_t\) doesn't matter, what matters are the returns
+\(r_t=log(p_t/p_{t-1})\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{returns }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(SP}\SpecialCharTok{$}\NormalTok{Index))))}
+\FunctionTok{summary}\NormalTok{(returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+## -0.2289972 -0.0046537  0.0004976  0.0003368  0.0056195  0.0870888
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(returns, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-46-1.pdf} \#\# The
+Data's Distribution \#\#\#\# quantile(x,probs) calculates the quantiles
+at probs from x.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(returns,}\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.75}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           25%           50%           75% 
+## -0.0046537538  0.0004976042  0.0056195438
+\end{verbatim}
+
+\paragraph{ecdf() - e mpirical c umulative d istribution f unction; no
+assumptions but also no guess about distribution between the
+observations.}\label{ecdf---e-mpirical-c-umulative-d-istribution-f-unction-no-assumptions-but-also-no-guess-about-distribution-between-the-observations.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(returns), }\AttributeTok{main=}\StringTok{"Empirical CDF of S\&P 500 index returns"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-48-1.pdf}
+Conceptually, quantile and ecdf are inverses to each other.
+
+\subsection{Getting Probability Densities from
+Data}\label{getting-probability-densities-from-data}
+
+ist(x) calculates a histogram from x.\\
+divide the data range up into equal-width bins and count how many fall
+into each bin.\\
+Or divide bin counts by (total count)*(width of bin), and get an
+estimate of the probability density function (pdf).\\
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(returns,}\AttributeTok{n=}\DecValTok{101}\NormalTok{,}\AttributeTok{probability=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-49-1.pdf}
+density(x) estimates the density of x by counting how many observations
+fall in a little window around each point, and then smoothing.\\
+``Bandwidth'' \([&approx&]\) width of window around each point\\
+Technically, a ``kernel density estimate''\\
+Remember: density() is an estimate of the pdf, not The Truth density
+returns a collection of \(x,y\) values, suitable for plotting
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(returns),}\AttributeTok{main=}\StringTok{"Estimated pdf of S\&P 500 index  returns"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-50-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(returns,}\AttributeTok{n=}\DecValTok{101}\NormalTok{,}\AttributeTok{probability=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(returns),}\AttributeTok{lty=}\StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-51-1.pdf} table()
+- tabulate outcomes, most useful for discrete spaces; remember to
+normalize if you want probabilities.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{table}\NormalTok{(cats}\SpecialCharTok{$}\NormalTok{Sex)}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(cats),}\AttributeTok{ylab=}\StringTok{"probability"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-52-1.pdf} \#\# R
+commands for distributions dfoo = the probability d ensity (if
+continuous) or probability mass function of foo (pdf or pmf)\\
+pfoo = the cumulative p robability function (CDF)\\
+qfoo = the q uantile function (inverse to CDF)\\
+rfoo = draw r andom numbers from foo (first argument always the number
+of draws)\\
+?Distributions to see which distributions are built in.
+
+\subsection{Displaying Probability
+Distributions}\label{displaying-probability-distributions}
+
+curve is very useful for the d, p, q functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dgamma}\NormalTok{(x,}\AttributeTok{shape=}\DecValTok{45}\NormalTok{,}\AttributeTok{scale=}\FloatTok{1.9}\NormalTok{),}\AttributeTok{from=}\DecValTok{0}\NormalTok{,}\AttributeTok{to=}\DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Ch6_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+\end{document}

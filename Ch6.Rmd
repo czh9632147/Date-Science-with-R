@@ -1,0 +1,334 @@
+---
+title: "Ch6"
+author: "CZH"
+date: "2024-07-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Test Case: Birth weight data
+Included in R already:
+```{r}
+library(tidyverse)
+library(lubridate)
+library(MASS)
+library(conflicted)
+data(birthwt)
+summary(birthwt)
+```
+
+#### Make it readable!
+```{r}
+colnames(birthwt)
+```
+```{r}
+colnames(birthwt) <- c("birthwt.below.2500", "mother.age",
+                       "mother.weight", "race",
+                       "mother.smokes", "previous.prem.labor",
+                       "hypertension", "uterine.irr",
+                       "physician.visits", "birthwt.grams")
+```
+Let's make all the factors more descriptive.
+```{r}
+birthwt$race <- factor(c("white", "black", "other")[birthwt$race])
+birthwt$mother.smokes <- factor(c("No", "Yes")[birthwt$mother.smokes + 1])
+birthwt$uterine.irr <- factor(c("No", "Yes")[birthwt$uterine.irr + 1])
+birthwt$hypertension <- factor(c("No", "Yes")[birthwt$hypertension + 1])
+```
+
+#### Bar plot for race
+```{r}
+birthwt |> ggplot(aes(x = race))+
+  geom_bar()+
+  labs(title = "Count of Mother's Race in Springfield MA, 1986")
+```
+#### Scatter plot for mother's ages
+```{r}
+birthwt |> ggplot(aes(x = 1:nrow(birthwt), y = mother.age))+
+  geom_point()+
+  labs(x = 'number', title = "Mother's Ages in Springfield MA, 1986")
+```
+#### Sorted mother's ages
+```{r}
+birthwt |> arrange(mother.age) |> ggplot(aes(x = 1:nrow(birthwt), y = mother.age))+
+  geom_point()+
+  labs(x = 'number', title = "Mother's Ages in Springfield MA, 1986")
+```
+#### Birth weight versus mother's ages
+```{r}
+birthwt |> ggplot(aes(x = mother.age, y = birthwt.grams))+
+  geom_point()+
+  labs(title = "Birth Weight by Mother's Age in Springfield MA, 1986")
+```
+#### Boxplot
+Let's fit some models to the data pertaining to our outcome(s) of interest.
+```{r}
+birthwt |> ggplot(aes(x = mother.smokes, y = birthwt.grams))+  
+  geom_boxplot()+
+  labs(title = "Birth Weight by Mother's Smoking Habit", y = "Birth Weight (g)", x="Mother Smokes")
+```
+
+#### Basic statistical testing
+```{r}
+t.test (birthwt$birthwt.grams[birthwt$mother.smokes == "Yes"], 
+        birthwt$birthwt.grams[birthwt$mother.smokes == "No"], var.equal = T)
+```
+Does this difference match the linear model?
+```{r}
+linear.model.1 <- lm (birthwt.grams ~ mother.smokes, data=birthwt)
+summary(linear.model.1)
+```
+```{r}
+linear.model.2 <- lm (birthwt.grams ~ mother.age, data=birthwt)
+summary(linear.model.2)
+```
+```{r}
+plot(linear.model.1)
+plot(linear.model.2)
+```
+
+
+#### Detecting Outliers
+These are the default diagnostic plots for the analysis. Note that our oldest mother and her heaviest child are greatly skewing this analysis as we suspected.
+```{r}
+birthwt.noout <- birthwt |> dplyr::filter(mother.age <= 40)
+linear.model.3 <- lm (birthwt.grams ~ mother.age, data=birthwt.noout)
+summary(linear.model.3)
+```
+
+
+#### More complex models
+Add in smoking behavior:
+```{r}
+linear.model.3a <- lm (birthwt.grams ~ + mother.smokes + mother.age, data=birthwt.noout)
+summary(linear.model.3a)
+```
+```{r}
+plot(linear.model.3a)
+```
+
+```{r}
+linear.model.3b <- lm (birthwt.grams ~ mother.age + mother.smokes + race, data=birthwt.noout)
+summary(linear.model.3b)
+```
+```{r}
+plot(linear.model.3b)
+```
+
+#### Everything Must Go (In)
+```{r}
+linear.model.4 <- lm (birthwt.grams ~ ., data=birthwt.noout)
+summary(linear.model.4)
+```
+
+#### Everything Must Go (In), Except What Must Not
+One of those variables was birthwt.below.2500 which is a function of the outcome.
+```{r}
+linear.model.4a <- lm (birthwt.grams ~ . - birthwt.below.2500, data=birthwt.noout)
+summary(linear.model.4a)
+```
+```{r}
+plot(linear.model.4a)
+```
+
+#### Generalized Linear Models
+Maybe a linear increase in birth weight is less important than if it's below a threshold like 2500 grams (5.5 pounds). Let's fit a generalized linear model instead:
+```{r}
+glm.0 <- glm (birthwt.below.2500 ~ . - birthwt.grams, data=birthwt.noout)
+summary(glm.0)
+```
+```{r}
+plot(glm.0)
+```
+
+The default value is a Gaussian model (a standard linear model). Change this:
+```{r}
+glm.1 <- glm (birthwt.below.2500 ~ . - birthwt.grams, data=birthwt.noout, family=binomial(link=logit))
+summary(glm.1)
+```
+```{r}
+plot(glm.1)
+```
+
+#### What Do We Do With This, Anyway?
+Let's take a subset of this data to do predictions.
+```{r}
+odds <- seq(1, nrow(birthwt.noout), by=2)
+birthwt.in <- birthwt.noout[odds,]
+birthwt.out <- birthwt.noout[-odds,]
+linear.model.half <- lm (birthwt.grams ~ . - birthwt.below.2500, data=birthwt.in)
+summary (linear.model.half)
+```
+```{r}
+birthwt.predict <- predict (linear.model.half)
+cor (birthwt.in$birthwt.grams, birthwt.predict)
+```
+```{r}
+tibble(x = birthwt.out$birthwt.grams, y = birthwt.predict) |>
+  ggplot (aes(x = x, y = y)) + geom_point()
+```
+```{r}
+birthwt.predict.out <- predict (linear.model.half, birthwt.out)
+cor (birthwt.out$birthwt.grams, birthwt.predict.out)
+```
+```{r}
+tibble(x = birthwt.out$birthwt.grams, y = birthwt.predict.out) |>
+  ggplot (aes(x = x, y = y)) + geom_point()
+```
+
+## Random number generators
+Example: runif, where we know where it started
+```{r}
+runif(1:10)
+```
+```{r}
+set.seed(10)
+runif(1:10)
+```
+
+#### Basic version: Linear Congruential Generator
+```{r}
+seed <- 10
+new.random <- function (a=5, c=12, m=16) {
+  out <- (a*seed + c) %% m
+  seed <<- out
+  return(out)
+}
+out.length <- 20
+variates <- rep (NA, out.length)
+for (kk in 1:out.length) variates[kk] <- new.random()
+variates
+```
+Try again. Period 8:
+```{r}
+variates <- rep (NA, out.length)
+for (kk in 1:out.length) variates[kk] <- new.random(a=131, c=7, m=16)
+variates
+```
+Try again, again. Period 16:
+```{r}
+variates <- rep (NA, out.length)
+for (kk in 1:out.length) variates[kk] <- new.random(a=129, c=7, m=16)
+variates
+```
+Try again, at last. Numerical Recipes uses:
+```{r}
+variates <- rep (NA, out.length)
+for (kk in 1:out.length) variates[kk] <- new.random(a=1664545, c=1013904223, m=2^32)
+variates
+```
+
+## A few distributions of interest:
+Uniform(0,1)\
+Bernoulli(p)\
+Binomial(n,p)\
+Gaussian(0,1)\
+Exponential(1)\
+Gamma(a)\
+
+## Suppose we were working with the Exponential distribution.
+#### rexp() generates variates from the distribution.
+```{r}
+rexp(0:5)
+```
+
+#### dexp() gives the probability density function.
+```{r}
+dexp(0:5)
+```
+```{r}
+this.range <- 0:50/5
+plot (this.range, dexp(this.range), ty="l")
+lines (this.range, dexp(this.range, rate=0.5), col="red")
+lines (this.range, dexp(this.range, rate=0.2), col="blue")
+```
+#### pexp() gives the cumulative distribution function.
+```{r}
+pexp(0:5)
+```
+```{r}
+this.range <- 0:50/5
+plot (this.range, pexp(this.range), ty="l")
+lines (this.range, pexp(this.range, rate=0.5), col="red")
+lines (this.range, pexp(this.range, rate=0.2), col="blue")
+```
+
+#### qexp() gives the quantiles.
+```{r}
+qexp(0:5)
+```
+```{r}
+this.range <- seq(0,1,by=0.01)
+plot (this.range, qexp(this.range), ylim = c(0, 10), ty="l")
+lines (this.range, qexp(this.range, rate=0.5), col="red")
+lines (this.range, qexp(this.range, rate=0.2), col="blue")
+```
+
+## S\&P 500
+The Standard and Poor's 500, or simply the S\&P 500, is a stock market index tracking the stock performance of 500 large companies listed on exchanges in the United States. It is one of the most commonly followed equity indices.
+```{r}
+library(readxl)
+SP <- read_excel("data/Stock_Bond.xls") |> dplyr::select(Date, `S&P_AC`) |>
+  rename(Index = `S&P_AC`)
+SP |> ggplot(aes(x = Date, y = Index)) + geom_line()
+```
+\
+The price $p_t$ doesn't matter, what matters are the returns $r_t=log(p_t/p_{t-1})$
+```{r}
+returns <- na.omit(as.vector(diff(log(SP$Index))))
+summary(returns)
+```
+```{r}
+plot(returns, type="l")
+```
+## The Data's Distribution
+#### quantile(x,probs) calculates the quantiles at probs from x.
+```{r}
+quantile(returns,c(0.25,0.5,0.75))
+```
+#### ecdf() - e mpirical c umulative d istribution f unction; no assumptions but also no guess about distribution between the observations.
+```{r}
+plot(ecdf(returns), main="Empirical CDF of S&P 500 index returns")
+```
+Conceptually, quantile and ecdf are inverses to each other.
+
+## Getting Probability Densities from Data
+ist(x) calculates a histogram from x.\
+divide the data range up into equal-width bins and count how many fall into each bin.\
+Or divide bin counts by (total count)*(width of bin), and get an estimate of the probability density function (pdf).\
+```{r}
+hist(returns,n=101,probability=TRUE)
+```
+density(x) estimates the density of x by counting how many observations fall in a little window around each point, and then smoothing.\
+"Bandwidth" $[&approx&]$ width of window around each point\
+Technically, a "kernel density estimate"\
+Remember: density() is an estimate of the pdf, not The Truth
+density returns a collection of $x,y$ values, suitable for plotting
+```{r}
+plot(density(returns),main="Estimated pdf of S&P 500 index  returns")
+```
+```{r}
+hist(returns,n=101,probability=TRUE)
+lines(density(returns),lty="dashed")
+```
+table() - tabulate outcomes, most useful for discrete spaces; remember to normalize if you want probabilities.
+```{r}
+plot(table(cats$Sex)/nrow(cats),ylab="probability")
+```
+## R commands for distributions
+dfoo = the probability d ensity (if continuous) or probability mass function of foo (pdf or pmf)\
+pfoo = the cumulative p robability function (CDF)\
+qfoo = the q uantile function (inverse to CDF)\
+rfoo = draw r andom numbers from foo (first argument always the number of draws)\
+?Distributions to see which distributions are built in.
+
+## Displaying Probability Distributions
+curve is very useful for the d, p, q functions:
+```{r}
+curve(dgamma(x,shape=45,scale=1.9),from=0,to=200)
+```
+
+
+
+
