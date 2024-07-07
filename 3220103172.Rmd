@@ -3,23 +3,23 @@ title: '3220103172'
 author: "Zhehao Chen"
 date: "2024-07-08"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### 1.
-##### (a) (5,8,1,5,8,1,...,5,8,1) where there are 10 occurrences of 5.
+## 1.
+#### (a) (5,8,1,5,8,1,...,5,8,1) where there are 10 occurrences of 5.
 To create a vector that repeats the sequence (5, 8, 1) so that there are 10 occurrences of 5, you can use the rep function:
 ```{r}
 tmp <- c(5, 8, 1)
 vec_a <- rep(tmp, times = 10)
 print(vec_a)
 ```
-##### (b) (5,5,...,5,8,8,...,8,1,1,...,1) where there are 30 occurrences of 5, 20 occurrences of 8 and 10 occurrences of 1.
+#### (b) (5,5,...,5,8,8,...,8,1,1,...,1) where there are 30 occurrences of 5, 20 occurrences of 8 and 10 occurrences of 1.
 To create a vector with 30 occurrences of 5, 20 occurrences of 8, and 10 occurrences of 1, you can use the rep function with the times argument as a vector:
 
 ```{r}
@@ -31,7 +31,7 @@ print(vec_b)
 
 
 
-### 2.
+## 2.
 Execute the following lines which create two vectors of random integers which are chosen with replacement from the integers 0,1,...,999. Both vectors have length 250.
 ```{r}
  xVec <- sample(0:999, 250, replace=T)
@@ -39,31 +39,31 @@ Execute the following lines which create two vectors of random integers which ar
  xVec
  yVec
 ```
-##### (a) Create the vector (y2 − x1,··· ,yn − xn−1).
+#### (a) Create the vector (y2 − x1,··· ,yn − xn−1).
 yVec[2:250] - xVec[1:249] creates a vector by subtracting each element in xVec (from the 1st to the 249th) from the corresponding next element in yVec (from the 2nd to the 250th).
 ```{r}
 aVec <- yVec[2:250] - xVec[1:249]
 print(aVec)
 ```
-##### (b) Pick out the values in yVec which are > 600.
+#### (b) Pick out the values in yVec which are > 600.
 yVec[yVec > 600] selects the values from yVec that are greater than 600.
 ```{r}
 bVec <- yVec[yVec > 600]
 print(bVec)
 ```
-##### (c) What are the index positions in yVec of the values which are > 600?
+#### (c) What are the index positions in yVec of the values which are > 600?
 which(yVec > 600) returns the index positions of elements in yVec that are greater than 600.
 ```{r}
 cVec <- which(yVec > 600)
 print(cVec)
 ```
-##### (d) Sort the numbers in the vector xVec in the order of increasing values in yVec.
+#### (d) Sort the numbers in the vector xVec in the order of increasing values in yVec.
 xVec[order(yVec)] sorts xVec based on the order of the corresponding elements in yVec.
 ```{r}
 dVec <- xVec[order(yVec)]
 print(dVec)
 ```
-#####  (e) Pick out the elements in yVec at index positions 1,4,7,10,13,···
+####  (e) Pick out the elements in yVec at index positions 1,4,7,10,13,···
 yVec[seq(1, length(yVec), by = 3)] picks out every third element in yVec starting from the first position.
 ```{r}
 eVec <- yVec[seq(1, length(yVec), by = 3)]
@@ -72,12 +72,12 @@ print(eVec)
 
 
 
-### 3.
+## 3.
 ```{r}
 X <- c(34, 33, 65, 37, 89, NA, 43, NA, 11, NA, 23, NA)
 X
 ```
-##### Write a piece of R code to count the number of occurrences of NA in X?
+#### Write a piece of R code to count the number of occurrences of NA in X?
  is.na(X) returns a logical vector of the same length as X with TRUE for each NA and FALSE otherwise.\
  sum(is.na(X)) sums the TRUE values, effectively counting the number of NA values in X.
 ```{r}
@@ -87,14 +87,14 @@ print(na_count)
 
 
 
-### 4.
+## 4.
 For this problem we’ll use the (built-in) dataset state.x77.
 ```{r}
 library(tidyverse)
 data(state)
 state.x77 <- as_tibble(state.x77, rownames = 'State')
 ```
-##### (a) Select all the states having an income less than 4300, and calculate the average income of these states.
+#### (a) Select all the states having an income less than 4300, and calculate the average income of these states.
 ```{r}
 # Select states with income less than 4300
 low_income_states <- state.x77 %>% filter(Income < 4300)
@@ -103,7 +103,7 @@ low_income_states <- state.x77 %>% filter(Income < 4300)
 average_low_income <- mean(low_income_states$Income)
 average_low_income
 ```
-##### (b) Sort the data by income and select the state with the highest income.
+#### (b) Sort the data by income and select the state with the highest income.
 ```{r}
 # Sort the data by income
 sorted_states <- state.x77 %>% arrange(desc(Income))
@@ -112,14 +112,14 @@ sorted_states <- state.x77 %>% arrange(desc(Income))
 highest_income_state <- sorted_states %>% slice(1)
 highest_income_state
 ```
-##### (c) Add a variable to the data frame which categorizes the size of population: <= 4500 is S, $> 4500 $ is L.
+#### (c) Add a variable to the data frame which categorizes the size of population: <= 4500 is S, $> 4500 $ is L.
 ```{r}
 # Add a variable categorizing the size of population
 state.x77 <- state.x77 %>% 
   mutate(PopulationSize = ifelse(Population <= 4500, 'S', 'L'))
 head(state.x77)
 ```
-##### (d) Find out the average income and illiteracy of the two groups of states, distinguishing by whether the states are small or large.
+#### (d) Find out the average income and illiteracy of the two groups of states, distinguishing by whether the states are small or large.
 ```{r}
 # Find the average income and illiteracy of the two groups of states
 grouped_stats <- state.x77 %>% 
@@ -134,8 +134,8 @@ grouped_stats
 
 
 
-### 5.
-#####  (a) Write a function to simulate n observations of (X1,X2) which follow the uniform distribution over the square [0,1] × [0,1].
+## 5.
+#### (a) Write a function to simulate n observations of (X1,X2) which follow the uniform distribution over the square [0,1] × [0,1].
 simulate_observations(n) generates n pairs of (X1,X2) uniformly distributed over [0,1]×[0,1].
 ```{r}
 simulate_observations <- function(n) {
@@ -144,7 +144,7 @@ simulate_observations <- function(n) {
   return(data.frame(X1, X2))
 }
 ```
-#####  (b) Write a function to calculate the proportion of the observations that the distance between (X1,X2) and the nearest edge is less than 0.25, and the proportion of them with the distance to the nearest vertex less than 0.25.
+####  (b) Write a function to calculate the proportion of the observations that the distance between (X1,X2) and the nearest edge is less than 0.25, and the proportion of them with the distance to the nearest vertex less than 0.25.
 edge_proportion: The proportion of observations where the distance to the nearest edge is less than 0.25.\
 vertex_proportion: The proportion of observations where the distance to the nearest vertex is less than 0.25.
 ```{r}
@@ -169,7 +169,7 @@ calculate_proportions <- function(observations) {
   return(list(edge_proportion = edge_proportion, vertex_proportion = vertex_proportion))
 }
 ```
-##### Example Usage:
+#### Example Usage:
 Here's how you can use the functions to simulate observations and calculate the proportions:
 ```{r}
 # Simulate 1000 observations
@@ -183,7 +183,7 @@ print(proportions)
 
 
 
-### 6.
+## 6.
 Mortality rates per 100,000 from male suicides for a number of age groups and a number of countries are given in the following data frame.
 ```{r}
  library(tidyverse)
@@ -195,7 +195,7 @@ Mortality rates per 100,000 from male suicides for a number of age groups and a 
  Age55.64 = c(34, 14, 31, 53, 47, 49, 81, 18, 20, 32, 16, 51, 50, 17, 33),
  Age65.74 = c(24, 27, 49, 69, 56, 52, 107, 27, 28, 28, 22, 35, 51, 22, 37))
 ```
-##### (a) Transform suicrates into long form.
+#### (a) Transform suicrates into long form.
 ```{r}
  library(tidyr)
 
@@ -205,7 +205,7 @@ suicrates_long <- suicrates %>%
 
 print(suicrates_long)
 ```
-##### (b) Construct side-by-side box plots for the data from different age groups, and comment on what the graphic tells us about the data.
+#### (b) Construct side-by-side box plots for the data from different age groups, and comment on what the graphic tells us about the data.
 ```{r}
  library(ggplot2)
 
@@ -220,37 +220,38 @@ ggplot(suicrates_long, aes(x = AgeGroup, y = Rate)) +
 
 
 
-### 7.
+## 7.
  In the data set pressure, the relevant theory is that associated with the Claudius- Clapeyron equation, by
  which the logarithm of the vapor pressure is approximately inversely proportional to the absolute temperature
  (temperature + 273). Transform the data in the manner suggested by this theoretical relationship, plot
  the data, fit a regression line, and add the line to the graph. Does the fit seem adequate?
-##### (1) Load the 'pressure' data set
+#### (1) Load the 'pressure' data set
 ```{r}
  data(pressure)
 head(pressure)
 ```
-##### (2) Transform the data
+#### (2) Transform the data
 According to the Clausius-Clapeyron equation, the logarithm of the vapor pressure is approximately inversely proportional to the absolute temperature (temperature + 273). We'll transform the temperature to its absolute value and compute the logarithm of the vapor pressure:
 ```{r}
 pressure$TemperatureK <- pressure$temperature + 273
 pressure$log_pressure <- log(pressure$pressure)
 ```
-##### (3) Plot the transformed data
+#### (3) Plot the transformed data
 ```{r}
 plot(1 / pressure$TemperatureK, pressure$log_pressure,
      xlab = "1 / Temperature (1/K)",
      ylab = "Log(Pressure)",
      main = "Clausius-Clapeyron Plot")
 ```
-##### (4) Fit a regression line
+
+#### (4) Fit a regression line
 Fit a linear model to the transformed data:
 ```{r}
 fit <- lm(log_pressure ~ I(1 / TemperatureK), data = pressure)
 summary(fit)
 ```
-##### (5) Add the regression line to the plot
-##### Here's the complete R code for the entire process:
+#### (5) Add the regression line to the plot
+#### Here's the complete R code for the entire process:
 ```{r}
 # Load the pressure data set
 data(pressure)
