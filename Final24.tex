@@ -1,0 +1,902 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Mathematical practice final exam 2024},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Mathematical practice final exam 2024}
+\author{}
+\date{\vspace{-2.5em}2024-07-08}
+
+\begin{document}
+\maketitle
+
+\subsection{1.}\label{section}
+
+Solve the following system of equations using the \texttt{solve()}
+function: \[
+\left(\begin{array}{cccc}
+9 & 4 & 12 & 2 \\
+5 & 0 & 7 & 9 \\
+2 & 6 & 8 & 0 \\
+9 & 2 & 9 & 11
+\end{array}\right) \times\left(\begin{array}{l}
+x \\
+y \\
+z \\
+t
+\end{array}\right)=\left(\begin{array}{c}
+7 \\
+18 \\
+1 \\
+0
+\end{array}\right)
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define the coefficient matrix A}
+\NormalTok{A }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{2}\NormalTok{,}
+              \DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{,}
+              \DecValTok{2}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{0}\NormalTok{,}
+              \DecValTok{9}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{), }
+            \AttributeTok{nrow =} \DecValTok{4}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Define the right{-}hand side vector b}
+\NormalTok{b }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Solve the system of equations}
+\NormalTok{solution }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(A, b)}
+
+\CommentTok{\# Print the solution}
+\FunctionTok{print}\NormalTok{(solution)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -4.2028571 -6.2285714  5.8471429 -0.2128571
+\end{verbatim}
+
+\subsection{2.}\label{section-1}
+
+Execute the following lines which create two vectors of random integers
+which are chosen with replacement from the integers
+\(0, 1, \dots , 999\). Both vectors have length 250.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xVec }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{999}\NormalTok{, }\DecValTok{250}\NormalTok{, }\AttributeTok{replace=}\NormalTok{T)}
+\NormalTok{yVec }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{999}\NormalTok{, }\DecValTok{250}\NormalTok{, }\AttributeTok{replace=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Create the vector \((y_2 - x_1, \cdots, y_n - x_{n-1}).\)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the vector (y\_2 {-} x\_1, ..., y\_n {-} x\_\{n{-}1\})}
+\NormalTok{newVec }\OtherTok{\textless{}{-}}\NormalTok{ yVec[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ xVec[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(xVec)]}
+\FunctionTok{print}\NormalTok{(newVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] -428  -56  507  -42  -97  -21 -132 -592    2 -249 -254 -173  738 -171  758
+##  [16]  -82 -439  512  332 -898  305 -117   52  269 -730  -99  114  315  339  106
+##  [31] -415    3  325 -622  107  543   11  706  149  792  715  664 -561  887 -433
+##  [46]  443 -685 -570  272 -364 -133  -64  706  222 -401   93 -328  280  260 -452
+##  [61]  267  310  108 -358  -11  790 -258  527 -231 -253  -83  209    1  117  615
+##  [76] -587  128 -326 -176 -210 -232 -446   -1  611 -710    9  319   97  -73  105
+##  [91]   49  322 -367  534 -199  334 -406  455  576 -714 -165 -110  262  599 -398
+## [106] -586 -526  461   45 -205   21 -209 -447 -167   16  -50  332  915 -239  898
+## [121]  -70   17 -287 -113 -259  189  142 -116  790 -408  165  -57 -207  261 -160
+## [136]  243  -55  891 -543  257  496  161  167 -572 -482 -398   29 -490  -14 -538
+## [151] -348 -962   49 -462 -473 -234  -62  735 -249 -413 -405 -399 -110 -310  525
+## [166] -226 -178  195 -525  559  374 -565 -206 -869 -430 -166  -48   48  263  218
+## [181] -638 -215  257   -7 -154 -131  -18  131  187 -318  -22 -133 -333  162 -130
+## [196] -664 -810 -254  785   48  404  253  -39 -112 -465 -167  -19 -241   48   36
+## [211]  433  827 -666 -213  377 -353 -786 -435  744   76 -469 -455 -450 -320  692
+## [226] -209  -12 -446  -10 -250 -281  416 -206 -762  416  266 -331  -18 -185 -460
+## [241]  -71  593 -165 -555 -201  211  489 -852 -363
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Pick out the values in yVec which are \(> 600\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Values in yVec greater than 600}
+\NormalTok{values\_gt\_600 }\OtherTok{\textless{}{-}}\NormalTok{ yVec[yVec }\SpecialCharTok{\textgreater{}} \DecValTok{600}\NormalTok{]}
+\FunctionTok{print}\NormalTok{(values\_gt\_600)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 675 712 735 661 847 799 671 965 993 629 917 936 998 975 768 717 889 727 999
+## [20] 860 888 665 909 646 684 920 914 760 663 722 795 785 642 784 824 714 815 787
+## [39] 976 868 986 713 654 677 772 812 788 946 900 710 806 800 943 954 627 813 908
+## [58] 755 968 638 705 937 952 969 721 666 830 734 610 888 847 787 852 722 658 971
+## [77] 895 898 904 759 759 699 976 737 909 715 663 988 735 850 726 961
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What are the index positions in yVec of the values which are
+  \(> 600\)?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Index positions of values in yVec greater than 600}
+\NormalTok{indices\_gt\_600 }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(yVec }\SpecialCharTok{\textgreater{}} \DecValTok{600}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(indices\_gt\_600)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]   3   4   5   8  14  16  19  29  34  36  37  39  40  41  42  43  45  47  50
+## [20]  52  54  57  59  63  66  67  69  75  76  80  85  87  88  89  90  91  93  95
+## [39]  97  99 100 103 104 105 109 117 118 119 121 123 130 133 135 139 141 143 144
+## [58] 157 159 166 167 169 171 172 179 185 189 190 195 200 203 204 205 207 208 210
+## [77] 211 212 213 216 220 221 226 227 228 230 233 237 239 243 246 248
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Sort the numbers in the vector xVec in the order of increasing values
+  in yVec.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sort xVec according to the order of yVec}
+\NormalTok{sorted\_xVec }\OtherTok{\textless{}{-}}\NormalTok{ xVec[}\FunctionTok{order}\NormalTok{(yVec)]}
+\FunctionTok{print}\NormalTok{(sorted\_xVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 314 653 727 683 629 288 188 230 802 577 393 695 349 413 989 402 284  59
+##  [19] 821 862 114 657  16 916 582 927 586 659 938 358 508 326  89  34  15 182
+##  [37] 499 889 284 868 382 543 356 736 103 448 557 173 878 994 793 988 535 763
+##  [55] 783 995 159 386 109  41  71 776 842 727 493 399   2 370 184 725 708 472
+##  [73] 253 614 865   2 699  26 113 362 533 588 175 620 622 682 834 643 522 923
+##  [91] 233 574 816 639 662 993 586 650 740 627 266 898 225 963 266 753 387 598
+## [109] 668  63 284 633 857 732 693 899 336 397 404 661 825 356  16 673 315 311
+## [127] 149 731 594 212 255 257 799 151 742 751 572 749 247  67 125 333 534 255
+## [145] 151 980 823 811 321 457 467 673 642 722 933 732 652 482 584 101 374 931
+## [163] 687 109  78 573 713 679 303 343 668 224 205 929 130 842 700 425 777 392
+## [181] 164 332 828 286 495 677  32 785 893 125 697 921 396 462 623  48  53 409
+## [199] 897 323 780 964  31 902 380 505 798 456 741 611 609 547 360 826 258 593
+## [217] 188 410 368  72 564 465  77 509 713 826 109 680 341  24 653 849 565 710
+## [235] 457 595 763 957 216 814 748 859  53 458 946 916 724 954 183 728
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Pick out the elements in yVec at index positions
+  \(1, 4, 7, 10, 13, \cdots\)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Elements in yVec at positions 1, 4, 7, 10, ...}
+\NormalTok{indices }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FunctionTok{length}\NormalTok{(yVec), }\AttributeTok{by =} \DecValTok{3}\NormalTok{)}
+\NormalTok{elements\_at\_indices }\OtherTok{\textless{}{-}}\NormalTok{ yVec[indices]}
+\FunctionTok{print}\NormalTok{(elements\_at\_indices)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 441 712 167  36 189 799 671 364 595 369 257 993 917 998 717 131  12 860 590
+## [20]  15 288 217 920 110 464 663 382 301 795 642 714 244 976 986 713 531 772  37
+## [39] 189 788 900 138 455 806 800 550 954 597 254 178 145 363 755 565 443 638 937
+## [58] 969 126 460 343 578  20 734 599 454 148 493 852 658 895  47 109 759 172 976
+## [77] 234 540 154 393 339  93 243 296
+\end{verbatim}
+
+\subsection{3.}\label{section-2}
+
+For this problem we'll use the (built-in) dataset state.x77.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(state)}
+\NormalTok{state.x77 }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(state.x77, }\AttributeTok{rownames  =} \StringTok{\textquotesingle{}State\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Select all the states having an income less than 4300, and calculate
+  the average income of these states.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Select states with income less than 4300}
+\NormalTok{low\_income\_states }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Income }\SpecialCharTok{\textless{}} \DecValTok{4300}\NormalTok{)}
+
+\CommentTok{\# Calculate the average income of these states}
+\NormalTok{average\_low\_income }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(low\_income\_states}\SpecialCharTok{$}\NormalTok{Income)}
+\NormalTok{average\_low\_income}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3830.6
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Sort the data by income and select the state with the highest income.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sort the data by income}
+\NormalTok{sorted\_states }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Income))}
+
+\CommentTok{\# Select the state with the highest income}
+\NormalTok{highest\_income\_state }\OtherTok{\textless{}{-}}\NormalTok{ sorted\_states }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{highest\_income\_state}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 9
+##   State  Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost   Area
+##   <chr>       <dbl>  <dbl>      <dbl>      <dbl>  <dbl>     <dbl> <dbl>  <dbl>
+## 1 Alaska        365   6315        1.5       69.3   11.3      66.7   152 566432
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Add a variable to the data frame which categorizes the size of
+  population: \(<= 4500\) is \texttt{S}, \$ \textgreater{} 4500 \$ is
+  \texttt{L}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add a variable categorizing the size of population}
+\NormalTok{state.x77 }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{PopulationSize =} \FunctionTok{ifelse}\NormalTok{(Population }\SpecialCharTok{\textless{}=} \DecValTok{4500}\NormalTok{, }\StringTok{\textquotesingle{}S\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}L\textquotesingle{}}\NormalTok{))}
+\FunctionTok{head}\NormalTok{(state.x77)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##   State    Population Income Illiteracy `Life Exp` Murder `HS Grad` Frost   Area
+##   <chr>         <dbl>  <dbl>      <dbl>      <dbl>  <dbl>     <dbl> <dbl>  <dbl>
+## 1 Alabama        3615   3624        2.1       69.0   15.1      41.3    20  50708
+## 2 Alaska          365   6315        1.5       69.3   11.3      66.7   152 566432
+## 3 Arizona        2212   4530        1.8       70.6    7.8      58.1    15 113417
+## 4 Arkansas       2110   3378        1.9       70.7   10.1      39.9    65  51945
+## 5 Califor~      21198   5114        1.1       71.7   10.3      62.6    20 156361
+## 6 Colorado       2541   4884        0.7       72.1    6.8      63.9   166 103766
+## # i 1 more variable: PopulationSize <chr>
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Find out the average income and illiteracy of the two groups of
+  states, distinguishing by whether the states are small or large.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the average income and illiteracy of the two groups of states}
+\NormalTok{grouped\_stats }\OtherTok{\textless{}{-}}\NormalTok{ state.x77 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(PopulationSize) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{Average\_Income =} \FunctionTok{mean}\NormalTok{(Income),}
+    \AttributeTok{Average\_Illiteracy =} \FunctionTok{mean}\NormalTok{(Illiteracy)}
+\NormalTok{  )}
+
+\NormalTok{grouped\_stats}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   PopulationSize Average_Income Average_Illiteracy
+##   <chr>                   <dbl>              <dbl>
+## 1 L                       4608.               1.2 
+## 2 S                       4355.               1.16
+\end{verbatim}
+
+\subsection{4.}\label{section-3}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Write a function to simulate \texttt{n} observations of \((X_1, X_2)\)
+  which follow the uniform distribution over the square
+  \([0, 1] \times [0, 1]\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulate\_observations }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  X1 }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{  X2 }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(X1, X2))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Write a function to calculate the proportion of the observations that
+  the distance between \((X_1, X_2)\) and the nearest edge is less than
+  0.25, and the proportion of them with the distance to the nearest
+  vertex less than 0.25.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_proportions }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(observations) \{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(observations)}
+\NormalTok{  X1 }\OtherTok{\textless{}{-}}\NormalTok{ observations}\SpecialCharTok{$}\NormalTok{X1}
+\NormalTok{  X2 }\OtherTok{\textless{}{-}}\NormalTok{ observations}\SpecialCharTok{$}\NormalTok{X2}
+  
+  \CommentTok{\# Distance to the nearest edge}
+\NormalTok{  edge\_distances }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(X1, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X1, X2, }\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ X2)}
+\NormalTok{  edge\_proportion }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(edge\_distances }\SpecialCharTok{\textless{}} \FloatTok{0.25}\NormalTok{)}
+  
+  \CommentTok{\# Distance to the nearest vertex}
+\NormalTok{  vertex\_distances }\OtherTok{\textless{}{-}} \FunctionTok{pmin}\NormalTok{(}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (0,0)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (0,1)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{0}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{),  }\CommentTok{\# distance to (1,0)}
+    \FunctionTok{sqrt}\NormalTok{((X1 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ (X2 }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)   }\CommentTok{\# distance to (1,1)}
+\NormalTok{  )}
+\NormalTok{  vertex\_proportion }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(vertex\_distances }\SpecialCharTok{\textless{}} \FloatTok{0.25}\NormalTok{)}
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{edge\_proportion =}\NormalTok{ edge\_proportion, }\AttributeTok{vertex\_proportion =}\NormalTok{ vertex\_proportion))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Example Usage:}\label{example-usage}
+
+Here's how you can use the functions to simulate observations and
+calculate the proportions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simulate 1000 observations}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)  }\CommentTok{\# Setting seed for reproducibility}
+\NormalTok{observations }\OtherTok{\textless{}{-}} \FunctionTok{simulate\_observations}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+
+\CommentTok{\# Calculate proportions}
+\NormalTok{proportions }\OtherTok{\textless{}{-}} \FunctionTok{calculate\_proportions}\NormalTok{(observations)}
+\FunctionTok{print}\NormalTok{(proportions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $edge_proportion
+## [1] 0.735
+## 
+## $vertex_proportion
+## [1] 0.198
+\end{verbatim}
+
+\subsection{5.}\label{section-4}
+
+To estimate \(\pi\) with a Monte Carlo simulation, we draw the unit
+circle inside the unit square, the ratio of the area of the circle to
+the area of the square will be \(\pi / 4\). Then shot \(K\) arrows at
+the square, roughly \(K * \pi / 4\) should have fallen inside the
+circle. So if now you shoot \(N\) arrows at the square, and \(M\) fall
+inside the circle, you have the following relationship
+\(M = N * \pi / 4\). You can thus compute \(\pi\) like so:
+\(\pi = 4 * M / N\). The more arrows \(N\) you throw at the square, the
+better approximation of \(\pi\) you'll have.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tibble)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(purrr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{10000}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{points }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\StringTok{"x"} \OtherTok{=} \FunctionTok{runif}\NormalTok{(n), }\StringTok{"y"} \OtherTok{=} \FunctionTok{runif}\NormalTok{(n))}
+\end{Highlighting}
+\end{Shaded}
+
+Now, to know if a point is inside the unit circle, we need to check
+whether \(x^2 + y^2 < 1\). Let's add a new column to the points tibble,
+called \texttt{inside} equal to \texttt{1} if the point is inside the
+unit circle and \texttt{0} if not:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{points }\OtherTok{\textless{}{-}}\NormalTok{ points }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{inside =} \FunctionTok{map2\_dbl}\NormalTok{(}\AttributeTok{.x =}\NormalTok{ x, }\AttributeTok{.y =}\NormalTok{ y, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{ifelse}\NormalTok{(.x}\SpecialCharTok{**}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ .y}\SpecialCharTok{**}\DecValTok{2} \SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{rowid\_to\_column}\NormalTok{(}\StringTok{"N"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Compute the estimation of \(\pi\) at each row, by computing the
+  cumulative sum of the 1's in the \texttt{inside} column and dividing
+  that by the current value of \texttt{N} column:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute the cumulative sum of the \textasciigrave{}inside\textasciigrave{} column}
+\NormalTok{points }\OtherTok{\textless{}{-}}\NormalTok{ points }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cumulative\_inside =} \FunctionTok{cumsum}\NormalTok{(inside),}
+         \AttributeTok{pi\_estimate =} \DecValTok{4} \SpecialCharTok{*}\NormalTok{ cumulative\_inside }\SpecialCharTok{/}\NormalTok{ N)}
+
+\FunctionTok{head}\NormalTok{(points)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##       N     x      y inside cumulative_inside pi_estimate
+##   <int> <dbl>  <dbl>  <dbl>             <dbl>       <dbl>
+## 1     1 0.266 0.0647      1                 1           4
+## 2     2 0.372 0.677       1                 2           4
+## 3     3 0.573 0.735       1                 3           4
+## 4     4 0.908 0.111       1                 4           4
+## 5     5 0.202 0.0467      1                 5           4
+## 6     6 0.898 0.131       1                 6           4
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Plot the estimates of \(\pi\) against \texttt{N}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(points, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ N, }\AttributeTok{y =}\NormalTok{ pi\_estimate)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =}\NormalTok{ pi, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Estimation of Pi using Monte Carlo Simulation"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Points (N)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Estimation of Pi"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final24_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\subsection{6.}\label{section-5}
+
+Mortality rates per 100,000 from male suicides for a number of age
+groups and a number of countries are given in the following data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{ suicrates }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{Country =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Canada\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Israel\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Japan\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Austria\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}France\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Germany\textquotesingle{}}\NormalTok{,}
+ \StringTok{\textquotesingle{}Hungary\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Italy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Netherlands\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Poland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Spain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sweden\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Switzerland\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}UK\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}USA\textquotesingle{}}\NormalTok{),}
+ \AttributeTok{Age25.34 =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{48}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{26}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+ \AttributeTok{Age35.44 =} \FunctionTok{c}\NormalTok{(}\DecValTok{27}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{29}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{22}\NormalTok{),}
+ \AttributeTok{Age45.54 =} \FunctionTok{c}\NormalTok{(}\DecValTok{31}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{84}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{46}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{28}\NormalTok{),}
+ \AttributeTok{Age55.64 =} \FunctionTok{c}\NormalTok{(}\DecValTok{34}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{31}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{33}\NormalTok{),}
+ \AttributeTok{Age65.74 =} \FunctionTok{c}\NormalTok{(}\DecValTok{24}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{52}\NormalTok{, }\DecValTok{107}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{37}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Transform \texttt{suicrates} into \emph{long} form.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{\# Transforming the data to long form}
+\NormalTok{suicrates\_long }\OtherTok{\textless{}{-}}\NormalTok{ suicrates }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Age"}\NormalTok{), }\AttributeTok{names\_to =} \StringTok{"AgeGroup"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Rate"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(suicrates\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 75 x 3
+##    Country AgeGroup  Rate
+##    <chr>   <chr>    <dbl>
+##  1 Canada  Age25.34    22
+##  2 Canada  Age35.44    27
+##  3 Canada  Age45.54    31
+##  4 Canada  Age55.64    34
+##  5 Canada  Age65.74    24
+##  6 Israel  Age25.34     9
+##  7 Israel  Age35.44    19
+##  8 Israel  Age45.54    10
+##  9 Israel  Age55.64    14
+## 10 Israel  Age65.74    27
+## # i 65 more rows
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Construct side-by-side box plots for the data from different age
+  groups, and comment on what the graphic tells us about the data.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Constructing side{-}by{-}side box plots}
+\FunctionTok{ggplot}\NormalTok{(suicrates\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ AgeGroup, }\AttributeTok{y =}\NormalTok{ Rate)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Suicide Rates by Age Group"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Age Group"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Suicide Rate per 100,000"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Final24_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\subsection{7.}\label{section-6}
+
+Load the \texttt{LaborSupply} dataset from the \texttt{\{Ecdat\}}
+package and answer the following questions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#data(LaborSupply)}
+\NormalTok{LaborSupply }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"LaborSupply.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 5320 Columns: 7
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## dbl (7): lnhr, lnwg, kids, age, disab, id, year
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create hour and wage variables}
+\NormalTok{labor }\OtherTok{\textless{}{-}}\NormalTok{ LaborSupply }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{hour =} \FunctionTok{exp}\NormalTok{(lnhr), }\AttributeTok{wage =} \FunctionTok{exp}\NormalTok{(lnwg), }\AttributeTok{.before =}\NormalTok{ kids) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{lnhr, }\SpecialCharTok{{-}}\NormalTok{lnwg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Compute the average annual hours worked and their standard deviations
+  by year.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute the average annual hours worked and their standard deviations by year}
+\NormalTok{average\_hours\_by\_year }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{avg\_hours =} \FunctionTok{mean}\NormalTok{(hour, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd\_hours =} \FunctionTok{sd}\NormalTok{(hour, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{print}\NormalTok{(average\_hours\_by\_year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##     year avg_hours sd_hours
+##    <dbl>     <dbl>    <dbl>
+##  1  1979     2202.     502.
+##  2  1980     2182.     454.
+##  3  1981     2185.     460.
+##  4  1982     2145.     442.
+##  5  1983     2124.     550.
+##  6  1984     2149.     492.
+##  7  1985     2203.     515.
+##  8  1986     2195.     482.
+##  9  1987     2219.     529.
+## 10  1988     2222.     478.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What age group worked the most hours in the year 1982?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Determine the age group that worked the most hours in the year 1982}
+\NormalTok{most\_hours\_1982 }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{1982}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(age) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{avg\_hours =} \FunctionTok{mean}\NormalTok{(hour, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(avg\_hours)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(most\_hours\_1982)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##     age avg_hours
+##   <dbl>     <dbl>
+## 1    46     2373.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Create a variable, \texttt{n\_years} that equals the number of years
+  an individual stays in the panel. Is the panel balanced?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the n\_years variable}
+\NormalTok{labor }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{n\_years =} \FunctionTok{n\_distinct}\NormalTok{(year)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+
+\CommentTok{\# Check if the panel is balanced}
+\NormalTok{panel\_balance }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{min\_years =} \FunctionTok{min}\NormalTok{(n\_years),}
+    \AttributeTok{max\_years =} \FunctionTok{max}\NormalTok{(n\_years)}
+\NormalTok{  )}
+
+\FunctionTok{print}\NormalTok{(panel\_balance)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   min_years max_years
+##       <int>     <int>
+## 1        10        10
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Which are the individuals that do not have any kids during the whole
+  period? Create a variable, \texttt{no\_kids}, that flags these
+  individuals (1 = no kids, 0 = kids)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Identify individuals that do not have any kids during the whole period}
+\NormalTok{labor }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{no\_kids =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{all}\NormalTok{(kids }\SpecialCharTok{==} \DecValTok{0}\NormalTok{), }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+
+\CommentTok{\# Check the \textasciigrave{}no\_kids\textasciigrave{} variable}
+\FunctionTok{print}\NormalTok{(labor }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(id, no\_kids) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{distinct}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 532 x 2
+##       id no_kids
+##    <dbl>   <dbl>
+##  1     1       0
+##  2     2       0
+##  3     3       1
+##  4     4       0
+##  5     5       0
+##  6     6       0
+##  7     7       0
+##  8     8       0
+##  9     9       0
+## 10    10       1
+## # i 522 more rows
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Using the \texttt{no\_kids} variable from before compute the average
+  wage, standard deviation and number of observations in each group for
+  the year 1980 (no kids group vs kids group).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute the average wage, standard deviation, and number of observations for each group in 1980}
+\NormalTok{wage\_stats\_1980 }\OtherTok{\textless{}{-}}\NormalTok{ labor }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year }\SpecialCharTok{==} \DecValTok{1980}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(no\_kids) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{avg\_wage =} \FunctionTok{mean}\NormalTok{(wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{sd\_wage =} \FunctionTok{sd}\NormalTok{(wage, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{n\_obs =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+
+\FunctionTok{print}\NormalTok{(wage\_stats\_1980)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 4
+##   no_kids avg_wage sd_wage n_obs
+##     <dbl>    <dbl>   <dbl> <int>
+## 1       0     14.5    6.69   489
+## 2       1     15.9    6.71    43
+\end{verbatim}
+
+\end{document}

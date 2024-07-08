@@ -1,0 +1,372 @@
+---
+title: "Mathematical practice final exam 2024"
+date: "2024-07-08"
+output:
+  pdf_document: default
+  word_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r message = F, echo = F}
+library(tidyverse)
+# install.packages("Ecdat")
+#library(Ecdat)
+```
+
+## 1. 
+Solve the following system of equations using the `solve()` function:
+$$
+\left(\begin{array}{cccc}
+9 & 4 & 12 & 2 \\
+5 & 0 & 7 & 9 \\
+2 & 6 & 8 & 0 \\
+9 & 2 & 9 & 11
+\end{array}\right) \times\left(\begin{array}{l}
+x \\
+y \\
+z \\
+t
+\end{array}\right)=\left(\begin{array}{c}
+7 \\
+18 \\
+1 \\
+0
+\end{array}\right)
+$$
+```{r}
+# Define the coefficient matrix A
+A <- matrix(c(9, 4, 12, 2,
+              5, 0, 7, 9,
+              2, 6, 8, 0,
+              9, 2, 9, 11), 
+            nrow = 4, byrow = TRUE)
+
+# Define the right-hand side vector b
+b <- c(7, 18, 1, 0)
+
+# Solve the system of equations
+solution <- solve(A, b)
+
+# Print the solution
+print(solution)
+```
+
+
+## 2. 
+Execute the following lines which create two vectors of random integers which are chosen with replacement from the integers $0, 1, \dots , 999$. Both vectors have length 250. 
+
+```{r}
+xVec <- sample(0:999, 250, replace=T)
+yVec <- sample(0:999, 250, replace=T)
+```
+
+(a) Create the vector $(y_2 - x_1, \cdots, y_n - x_{n-1}).$
+```{r}
+# Create the vector (y_2 - x_1, ..., y_n - x_{n-1})
+newVec <- yVec[-1] - xVec[-length(xVec)]
+print(newVec)
+```
+
+
+(b) Pick out the values in yVec which are $> 600$.
+
+```{r}
+# Values in yVec greater than 600
+values_gt_600 <- yVec[yVec > 600]
+print(values_gt_600)
+```
+
+
+(c) What are the index positions in yVec of the values which are $> 600$? 
+
+```{r}
+# Index positions of values in yVec greater than 600
+indices_gt_600 <- which(yVec > 600)
+print(indices_gt_600)
+```
+
+
+(d) Sort the numbers in the vector xVec in the order of increasing values in yVec. 
+
+```{r}
+# Sort xVec according to the order of yVec
+sorted_xVec <- xVec[order(yVec)]
+print(sorted_xVec)
+```
+
+
+(e) Pick out the elements in yVec at index positions $1, 4, 7, 10, 13, \cdots$
+
+```{r}
+# Elements in yVec at positions 1, 4, 7, 10, ...
+indices <- seq(1, length(yVec), by = 3)
+elements_at_indices <- yVec[indices]
+print(elements_at_indices)
+```
+
+## 3.
+For this problem we'll use the (built-in) dataset state.x77.
+```{r}
+data(state)
+state.x77 <- as_tibble(state.x77, rownames  = 'State')
+```
+
+a. Select all the states having an income less than 4300, and calculate the average income of these states.
+```{r}
+# Select states with income less than 4300
+low_income_states <- state.x77 %>% filter(Income < 4300)
+
+# Calculate the average income of these states
+average_low_income <- mean(low_income_states$Income)
+average_low_income
+```
+
+b.	Sort the data by income and select the state with the highest income.
+```{r}
+# Sort the data by income
+sorted_states <- state.x77 %>% arrange(desc(Income))
+
+# Select the state with the highest income
+highest_income_state <- sorted_states %>% slice(1)
+highest_income_state
+```
+
+c.	Add a variable to the data frame which categorizes the size of population: $<= 4500$ is `S`, $ > 4500 $ is `L`.
+```{r}
+# Add a variable categorizing the size of population
+state.x77 <- state.x77 %>% 
+  mutate(PopulationSize = ifelse(Population <= 4500, 'S', 'L'))
+head(state.x77)
+```
+
+d.	Find out the average income and illiteracy of the two groups of states, distinguishing by whether the states are small or large.
+```{r}
+# Find the average income and illiteracy of the two groups of states
+grouped_stats <- state.x77 %>% 
+  group_by(PopulationSize) %>% 
+  summarise(
+    Average_Income = mean(Income),
+    Average_Illiteracy = mean(Illiteracy)
+  )
+
+grouped_stats
+```
+
+## 4. 
+a. Write a function to simulate `n` observations of $(X_1, X_2)$ which follow the uniform distribution over the square $[0, 1] \times [0, 1]$.
+```{r}
+simulate_observations <- function(n) {
+  X1 <- runif(n, 0, 1)
+  X2 <- runif(n, 0, 1)
+  return(data.frame(X1, X2))
+}
+```
+
+b. Write a function to calculate the proportion of the observations that the distance between $(X_1, X_2)$ and the nearest edge is less than 0.25, and the proportion of them with the distance to the nearest vertex less than 0.25.
+```{r}
+calculate_proportions <- function(observations) {
+  n <- nrow(observations)
+  X1 <- observations$X1
+  X2 <- observations$X2
+  
+  # Distance to the nearest edge
+  edge_distances <- pmin(X1, 1 - X1, X2, 1 - X2)
+  edge_proportion <- mean(edge_distances < 0.25)
+  
+  # Distance to the nearest vertex
+  vertex_distances <- pmin(
+    sqrt((X1 - 0)^2 + (X2 - 0)^2),  # distance to (0,0)
+    sqrt((X1 - 0)^2 + (X2 - 1)^2),  # distance to (0,1)
+    sqrt((X1 - 1)^2 + (X2 - 0)^2),  # distance to (1,0)
+    sqrt((X1 - 1)^2 + (X2 - 1)^2)   # distance to (1,1)
+  )
+  vertex_proportion <- mean(vertex_distances < 0.25)
+  
+  return(list(edge_proportion = edge_proportion, vertex_proportion = vertex_proportion))
+}
+```
+#### Example Usage:
+Here's how you can use the functions to simulate observations and calculate the proportions:
+```{r}
+# Simulate 1000 observations
+set.seed(123)  # Setting seed for reproducibility
+observations <- simulate_observations(1000)
+
+# Calculate proportions
+proportions <- calculate_proportions(observations)
+print(proportions)
+```
+
+## 5.
+
+To estimate $\pi$ with a Monte Carlo simulation, we draw the unit circle inside the unit square, the ratio of the area of the circle to the area of the square will be $\pi / 4$. Then shot $K$ arrows at the square, roughly $K * \pi / 4$ should have fallen inside the circle. So if now you shoot $N$ arrows at the square, and $M$ fall inside the circle, you have the following relationship $M = N * \pi / 4$. You can thus compute $\pi$ like so: $\pi = 4 * M / N$. The more arrows $N$ you throw at the square, the better approximation of $\pi$ you'll have.
+
+```{r}
+library(tibble)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+
+n <- 10000
+
+set.seed(1)
+points <- tibble("x" = runif(n), "y" = runif(n))
+```
+
+Now, to know if a point is inside the unit circle, we need to check whether $x^2 + y^2 < 1$. Let's add a new column to the points tibble, called `inside` equal to `1` if the point is inside the unit circle and `0` if not:
+
+```{r}
+points <- points |> 
+    mutate(inside = map2_dbl(.x = x, .y = y, ~ifelse(.x**2 + .y**2 < 1, 1, 0))) |> 
+    rowid_to_column("N")
+```
+
+a. Compute the estimation of $\pi$ at each row, by computing the cumulative sum of the 1's in the `inside` column and dividing that by the current value of `N` column:
+
+```{r}
+# Compute the cumulative sum of the `inside` column
+points <- points %>%
+  mutate(cumulative_inside = cumsum(inside),
+         pi_estimate = 4 * cumulative_inside / N)
+
+head(points)
+```
+
+b. Plot the estimates of $\pi$ against `N`.
+
+```{r}
+ggplot(points, aes(x = N, y = pi_estimate)) +
+  geom_line() +
+  geom_hline(yintercept = pi, col = "red", linetype = "dashed") +
+  labs(title = "Estimation of Pi using Monte Carlo Simulation",
+       x = "Number of Points (N)",
+       y = "Estimation of Pi") +
+  theme_minimal()
+```
+
+## 6. 
+Mortality rates per 100,000 from male suicides for a number of age groups and a number of countries are given in the following data frame. 
+```{r}
+library(tidyverse)
+ suicrates <- tibble(Country = c('Canada', 'Israel', 'Japan', 'Austria', 'France', 'Germany',
+ 'Hungary', 'Italy', 'Netherlands', 'Poland', 'Spain', 'Sweden', 'Switzerland', 'UK', 'USA'),
+ Age25.34 = c(22, 9, 22, 29, 16, 28, 48, 7, 8, 26, 4, 28, 22, 10, 20),
+ Age35.44 = c(27, 19, 19, 40, 25, 35, 65, 8, 11, 29, 7, 41, 34, 13, 22),
+ Age45.54 = c(31, 10, 21, 52, 36, 41, 84, 11, 18, 36, 10, 46, 41, 15, 28),
+ Age55.64 = c(34, 14, 31, 53, 47, 49, 81, 18, 20, 32, 16, 51, 50, 17, 33),
+ Age65.74 = c(24, 27, 49, 69, 56, 52, 107, 27, 28, 28, 22, 35, 51, 22, 37))
+```
+
+a. Transform `suicrates` into *long* form.
+```{r}
+library(tidyr)
+
+# Transforming the data to long form
+suicrates_long <- suicrates %>%
+  pivot_longer(cols = starts_with("Age"), names_to = "AgeGroup", values_to = "Rate")
+
+print(suicrates_long)
+```
+
+b. Construct side-by-side box plots for the data from different age groups, and comment on what the graphic tells us about the data. 
+```{r}
+ library(ggplot2)
+
+# Constructing side-by-side box plots
+ggplot(suicrates_long, aes(x = AgeGroup, y = Rate)) +
+  geom_boxplot() +
+  labs(title = "Suicide Rates by Age Group",
+       x = "Age Group",
+       y = "Suicide Rate per 100,000") +
+  theme_minimal()
+```
+
+## 7. 
+Load the `LaborSupply` dataset from the `{Ecdat}` package and answer the following questions:
+
+```{r}
+#data(LaborSupply)
+LaborSupply <- read_csv("LaborSupply.csv")
+# create hour and wage variables
+labor <- LaborSupply |> 
+  mutate(hour = exp(lnhr), wage = exp(lnwg), .before = kids) |> 
+  dplyr::select(-lnhr, -lnwg)
+```
+
+a. Compute the average annual hours worked and their standard deviations by year.
+
+```{r}
+# Compute the average annual hours worked and their standard deviations by year
+average_hours_by_year <- labor %>%
+  group_by(year) %>%
+  summarize(
+    avg_hours = mean(hour, na.rm = TRUE),
+    sd_hours = sd(hour, na.rm = TRUE)
+  )
+
+print(average_hours_by_year)
+```
+
+b. What age group worked the most hours in the year 1982?
+
+```{r}
+# Determine the age group that worked the most hours in the year 1982
+most_hours_1982 <- labor %>%
+  filter(year == 1982) %>%
+  group_by(age) %>%
+  summarize(avg_hours = mean(hour, na.rm = TRUE)) %>%
+  arrange(desc(avg_hours)) %>%
+  slice(1)
+
+print(most_hours_1982)
+```
+
+c. Create a variable, `n_years` that equals the number of years an individual stays in the panel. Is the panel balanced?
+
+```{r}
+# Create the n_years variable
+labor <- labor %>%
+  group_by(id) %>%
+  mutate(n_years = n_distinct(year)) %>%
+  ungroup()
+
+# Check if the panel is balanced
+panel_balance <- labor %>%
+  summarize(
+    min_years = min(n_years),
+    max_years = max(n_years)
+  )
+
+print(panel_balance)
+```
+
+d. Which are the individuals that do not have any kids during the whole period? Create a variable, `no_kids`, that flags these individuals (1 = no kids, 0 = kids)
+
+```{r}
+# Identify individuals that do not have any kids during the whole period
+labor <- labor %>%
+  group_by(id) %>%
+  mutate(no_kids = ifelse(all(kids == 0), 1, 0)) %>%
+  ungroup()
+
+# Check the `no_kids` variable
+print(labor %>% select(id, no_kids) %>% distinct())
+```
+
+e. Using the `no_kids` variable from before compute the average wage, standard deviation and number of observations in each group for the year 1980 (no kids group vs kids group).
+
+```{r}
+# Compute the average wage, standard deviation, and number of observations for each group in 1980
+wage_stats_1980 <- labor %>%
+  filter(year == 1980) %>%
+  group_by(no_kids) %>%
+  summarize(
+    avg_wage = mean(wage, na.rm = TRUE),
+    sd_wage = sd(wage, na.rm = TRUE),
+    n_obs = n()
+  )
+
+print(wage_stats_1980)
+```
+
